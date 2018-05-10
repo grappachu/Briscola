@@ -19,19 +19,23 @@ namespace Grappachu.Briscola.UI.Util
             _ui = ui;
             _strategyFactory = strategyFactory;
         }
-        public void Initialize()
+
+
+        public void InitializeHumanGame(int totalPlayers)
         {
-            _ui.Send("Briscola a 4 giocatori");
+            _ui.Send($"Briscola a {totalPlayers} giocatori");
             _ui.Strong("Come ti chiami?");
             string yourName = _ui.Get();
 
             var players = new[] { "Davide", "Nello", "Sergio", "Giulia", "Silvio" };
             var toPlay = players.Where(x => x != yourName)
-                .OrderBy(p => Guid.NewGuid()).Take(3).ToArray();
+                .OrderBy(p => Guid.NewGuid()).Take(totalPlayers - 1).ToArray();
 
-            _ui.Send("Giocherai assieme a: " + toPlay.ElementAt(1));
+            if (totalPlayers == 4)
+            {
+                _ui.Send("Giocherai assieme a: " + toPlay.ElementAt(1));
+            }
             _ui.Send("Buona Partita!\n");
-
 
             _game.Join(yourName, new HumanStrategy(_ui));
             foreach (var pl in toPlay)
@@ -39,8 +43,10 @@ namespace Grappachu.Briscola.UI.Util
                 var strategy = GetRandomStrategy();
                 _game.Join(pl, strategy);
             }
-
         }
+
+
+
 
         private IStrategy GetRandomStrategy()
         {
@@ -48,9 +54,15 @@ namespace Grappachu.Briscola.UI.Util
         }
 
 
-        public void InitializeTournamentMatch(IStrategy strategyA1, IStrategy strategyB1, IStrategy strategyA2, IStrategy strategyB2)
+
+        public void InitializeRoboMatch(string strategy1, string strategy2, int num)
         {
             _ui.Send("Briscola a 4 giocatori");
+
+            var strategyA1 = _strategyFactory.GetStrategy(strategy1);
+            var strategyA2 = _strategyFactory.GetStrategy(strategy1);
+            var strategyB1 = _strategyFactory.GetStrategy(strategy2);
+            var strategyB2 = _strategyFactory.GetStrategy(strategy2);
 
             var players = new[] { "Bill Gates", "Steve Jobbs", "Mark Zuckerberg", "Alberto Baruzzo", "Alan Turing", "Linus Torvalds", "Elliot Alderson" };
             var toPlay = players.OrderBy(p => Guid.NewGuid()).Take(4).ToArray();
@@ -69,10 +81,11 @@ namespace Grappachu.Briscola.UI.Util
         public Tuple<int, int> Play()
         {
             _game.Start();
-            for (var i = 0; i < 10; i++)
+            var totalTurns = 40 / _game.State.Players.Count;
+            for (var i = 0; i < totalTurns; i++)
             {
-                _ui.Custom(ConsoleColor.Yellow, string.Format("\n===== {0}� Mano ===== (Briscola: "
-                    + _game.State.Briscola.Value + " di " + _game.State.Briscola.Seed + ")", i + 1));
+                _ui.Custom(ConsoleColor.Yellow, string.Format("\n===== {0}° Mano ===== (Briscola: {1} di {2})",
+                    i + 1, _game.State.Briscola.Value, _game.State.Briscola.Seed));
                 _game.PlayHand();
 
                 _game.Refill();
@@ -105,6 +118,7 @@ namespace Grappachu.Briscola.UI.Util
             }
 
 
+            var pron = _game.State.Players.Count == 4 ? "AVETE" : "HAI";
             if (yourScore == opponentScore)
             {
                 _ui.Custom(ConsoleColor.Yellow, "\n >>> PAREGGIO <<<");
@@ -113,11 +127,11 @@ namespace Grappachu.Briscola.UI.Util
             {
                 if (yourScore > opponentScore)
                 {
-                    _ui.Custom(ConsoleColor.Green, "\n >>> AVETE VINTO! <<<");
+                    _ui.Custom(ConsoleColor.Green, "\n >>> " + pron + " VINTO! <<<");
                 }
                 else
                 {
-                    _ui.Custom(ConsoleColor.Red, "\n >>> PECCATO! AVETE PERSO <<<");
+                    _ui.Custom(ConsoleColor.Red, "\n >>> PECCATO! " + pron + " PERSO <<<");
                 }
             }
 

@@ -8,5 +8,6 @@ namespace Grappachu.Briscola.Interfaces
 
         IEnumerable<IStrategy> GetAllRobots();
 
+        IStrategy GetStrategy(string strategyName);
     }
 }

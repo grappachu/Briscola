@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Logic;
 using Grappachu.Briscola.Players;
@@ -12,19 +13,59 @@ namespace Grappachu.Briscola.UI
     internal class Program
     {
         private static StrategyFactory _strategyFactory;
-        private static IUserInterface _ui = Chat.GetUI();
+        private static IUserInterface _ui;
 
         private static void Main(string[] args)
         {
             _strategyFactory = new StrategyFactory();
+            _ui = Chat.GetUI();
+            var version = Assembly.GetEntryAssembly().GetName().Version;
 
-            //  RunGame(ui);
-            RunTournament(_ui);
+            _ui.Send("===============================================================================");
+            _ui.Send("---------------------------------- Briscola -----------------------------------");
+            _ui.Send("-------------------------------- v. " + version + " ---------------------------------");
+            _ui.Send("===============================================================================");
+            string cmd;
+            do
+            {
+                _ui.Send("");
+                _ui.Send("Cosa vuoi fare?");
+                _ui.Send("");
+                _ui.Send("  (1) | Partita singola a 2 giocatori (umano/pc)");
+                _ui.Send("  (2) | Partita singola a 4 giocatori (umano/pc)");
+                _ui.Send("  (3) | Partita singola a 4 tra robot");
+                _ui.Send("  (4) | Gran Torneo dei Robot");
+                _ui.Send("  (x) | Esci");
 
-            _ui.Get();
+                cmd = _ui.Get();
+
+                switch (cmd)
+                {
+                    case "1":
+                        Run2PlayerGame();
+                        break;
+                    case "2":
+                        Run4PlayerGame();
+                        break;
+                    case "3":
+                        RunTournament(_ui);
+                        break;
+                    case "4":
+                        _ui.Strong("NON IMPLEMENTATO");
+                        //   RunTournament(_ui);
+                        break;
+                }
+
+            } while (!IsExit(cmd));
+
         }
 
-        private static void RunTournament(IUserInterface ui)
+        private static bool IsExit(string command)
+        {
+            return string.Equals(command, "Q", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static void RunTournament(IUserInterface ui, int matches = 1000)
         {
             int matchId = 1;
 
@@ -32,15 +73,9 @@ namespace Grappachu.Briscola.UI
             for (int i = 0; i < 120; i++)
             {
 
-                var strategy1 = _strategyFactory.GetAllRobots().First();
-                var strategy2 = _strategyFactory.GetAllRobots().First();
-                var strategy3 = _strategyFactory.GetAllRobots().First();
-                var strategy4 = _strategyFactory.GetAllRobots().First();
-
                 var g = new BriscolaGame(new ItalianDeckFactory(), new PlayerFactory(), new GameEvaluator());
                 var runner = new GameRunner(g, ui, _strategyFactory);
-                runner.InitializeTournamentMatch(strategy1, strategy2, strategy3, strategy4);
-
+                runner.InitializeRoboMatch("random", "random", 4);
                 var result = runner.Play();
                 scores.Add(result);
             }
@@ -58,12 +93,19 @@ namespace Grappachu.Briscola.UI
             ui.Send("Squadra 2: " + team2Score);
         }
 
-        private static void RunGame()
+        private static void Run2PlayerGame()
         {
             var g = new BriscolaGame(new ItalianDeckFactory(), new PlayerFactory(), new GameEvaluator());
             var runner = new GameRunner(g, _ui, _strategyFactory);
+            runner.InitializeHumanGame(2);
+            runner.Play();
+        }
 
-            runner.Initialize();
+        private static void Run4PlayerGame()
+        {
+            var g = new BriscolaGame(new ItalianDeckFactory(), new PlayerFactory(), new GameEvaluator());
+            var runner = new GameRunner(g, _ui, _strategyFactory);
+            runner.InitializeHumanGame(4);
             runner.Play();
         }
     }

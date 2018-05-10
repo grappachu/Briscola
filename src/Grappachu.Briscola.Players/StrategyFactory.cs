@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Players.Default;
 using Grappachu.Briscola.Players.Human;
@@ -7,6 +9,16 @@ namespace Grappachu.Briscola.Players
 {
     public class StrategyFactory : IStrategyFactory
     {
+        private readonly Dictionary<string, Func<IStrategy>> _roboFactories;
+
+        public StrategyFactory()
+        {
+            _roboFactories = new Dictionary<string, Func<IStrategy>>
+            {
+                {"random", () => new RandomStrategy()}
+            };
+        }
+
         public IStrategy GetHumanStrategy(IUserInterface ui)
         {
             return new HumanStrategy(ui);
@@ -14,10 +26,12 @@ namespace Grappachu.Briscola.Players
 
         public IEnumerable<IStrategy> GetAllRobots()
         {
-            return new[]
-            {
-                 new RandomStrategy()
-            };
+            return _roboFactories.Select(x => x.Value.Invoke()).ToArray();
+        }
+
+        public IStrategy GetStrategy(string strategyName)
+        {
+            return _roboFactories[strategyName].Invoke();
         }
     }
 }

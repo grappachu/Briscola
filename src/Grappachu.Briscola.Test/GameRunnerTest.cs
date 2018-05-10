@@ -28,7 +28,7 @@ namespace Grappachu.Briscola.Test
             _gameMock.Setup(x => x.Join(It.IsAny<string>(), It.IsAny<IStrategy>()));
             _strategyFactory.Setup(x => x.GetAllRobots()).Returns(new[] {new RandomStrategy()});
 
-            _sut.Initialize();
+            _sut.InitializeHumanGame(4);
 
             _gameMock.Verify(m => m.Join(It.IsAny<string>(), It.IsAny<IStrategy>()), Times.AtLeast(2));
         }

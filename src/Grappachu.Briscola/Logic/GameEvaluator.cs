@@ -9,11 +9,6 @@ namespace Grappachu.Briscola.Logic
     // Step 3: Raccolgo la logica "complessa" del gioco in una classe
     public class GameEvaluator : IGameEvaluator
     {
-        public GameEvaluator()
-        {
-            
-        }
-        
         public int Assign(GameState state)
         {
             var playerIdx = state.Evaluate();
