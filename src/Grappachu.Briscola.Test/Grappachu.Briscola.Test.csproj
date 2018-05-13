@@ -73,7 +73,7 @@
     <Compile Include="GameRunnerTest.cs" />
     <Compile Include="Logic\Strategies\HumanStrategyTest.cs" />
     <Compile Include="Logic\DeckTest.cs" />
-    <Compile Include="Logic\EvaluatorTest.cs" />
+    <Compile Include="Logic\BriscolaUtilsTest.cs" />
     <Compile Include="Logic\GameTest.cs" />
     <Compile Include="Logic\ItalianDeckFactoryTest.cs" />
     <Compile Include="Logic\PlayerTest.cs" />

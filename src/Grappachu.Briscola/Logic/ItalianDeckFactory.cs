@@ -3,6 +3,9 @@ using Grappachu.Briscola.Model;
 
 namespace Grappachu.Briscola.Logic
 {
+    /// <summary>
+    ///     Rappresenta una factory per la creazione di un mazzo italiano di 40 carte
+    /// </summary>
     public class ItalianDeckFactory : IDeckFactory
     {
         public IDeck CreateDeck()

@@ -37,7 +37,7 @@ namespace Grappachu.Briscola.UI.Util
             }
             _ui.Send("Buona Partita!\n");
 
-            _game.Join(yourName, new HumanStrategy(_ui));
+            _game.Join(yourName, new HumanStrategy(_ui, yourName));
             foreach (var pl in toPlay)
             {
                 var strategy = GetRandomStrategy();
@@ -94,7 +94,7 @@ namespace Grappachu.Briscola.UI.Util
             _ui.Send("\nPARTITA TERMINATA!");
             foreach (var player in _game.State.Players)
             {
-                _ui.Send(player.Name + " => " + GameEvaluator.Totalize(player.Stack));
+                _ui.Send(player.Name + " => " + BriscolaUtils.Totalize(player.Stack));
             }
 
 
@@ -103,8 +103,8 @@ namespace Grappachu.Briscola.UI.Util
             int opponentScore;
             if (pl.Length == 4)
             {
-                yourScore = GameEvaluator.Totalize(pl[0].Stack) + GameEvaluator.Totalize(pl[2].Stack);
-                opponentScore = GameEvaluator.Totalize(pl[1].Stack) + GameEvaluator.Totalize(pl[3].Stack);
+                yourScore = BriscolaUtils.Totalize(pl[0].Stack) + BriscolaUtils.Totalize(pl[2].Stack);
+                opponentScore = BriscolaUtils.Totalize(pl[1].Stack) + BriscolaUtils.Totalize(pl[3].Stack);
 
                 _ui.Send(string.Empty);
                 _ui.Send(pl[0].Name + " e " + pl[2].Name + " => " + yourScore);
@@ -112,9 +112,9 @@ namespace Grappachu.Briscola.UI.Util
             }
             else
             {
-                yourScore = GameEvaluator.Totalize(pl[0].Stack);
+                yourScore = BriscolaUtils.Totalize(pl[0].Stack);
                 opponentScore = pl.Where(x => x != pl[0])
-                    .Select(p => GameEvaluator.Totalize(p.Stack)).Max();
+                    .Select(p => BriscolaUtils.Totalize(p.Stack)).Max();
             }
 
 

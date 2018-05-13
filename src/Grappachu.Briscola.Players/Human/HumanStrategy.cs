@@ -10,10 +10,13 @@ namespace Grappachu.Briscola.Players.Human
     {
         private readonly IUserInterface _userInterface;
 
-        public HumanStrategy(IUserInterface userInterface)
+        public HumanStrategy(IUserInterface userInterface, string name)
         {
             _userInterface = userInterface;
+            Name = name;
         }
+
+        public string Name { get; }
 
         public Card Choose(IPlayer playFor, GameState state)
         {
@@ -27,9 +30,9 @@ namespace Grappachu.Briscola.Players.Human
                 sb.AppendFormat("  (x) | Abbandona la partita\n");
 
                 _userInterface.Send(sb.ToString());
-                var val = _userInterface.Get().ToLowerInvariant();
+                var val = _userInterface.GetChoice();
 
-                if (val == "x")
+                if (string.Equals(val, "x", StringComparison.OrdinalIgnoreCase))
                     Environment.Exit(0);
                 int idx;
                 if (int.TryParse(val, out idx) && idx > 0 && idx <= playFor.HandCards.Count())
@@ -39,7 +42,6 @@ namespace Grappachu.Briscola.Players.Human
 
         public void Watch(IPlayer player, GameState state)
         {
-           Console.WriteLine("debuggo...");
             // l'umano pensa per la macchina
         }
 

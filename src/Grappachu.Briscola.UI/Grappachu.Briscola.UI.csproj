@@ -44,6 +44,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Pairing\BergerPairing.cs" />
+    <Compile Include="Util\Pairing\BergerTables.cs" />
+    <Compile Include="Util\Pairing\Match.cs" />
     <Compile Include="Util\GameRunner.cs" />
   </ItemGroup>
   <ItemGroup>

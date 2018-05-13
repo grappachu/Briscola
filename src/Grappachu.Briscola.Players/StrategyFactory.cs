@@ -15,13 +15,15 @@ namespace Grappachu.Briscola.Players
         {
             _roboFactories = new Dictionary<string, Func<IStrategy>>
             {
-                {"random", () => new RandomStrategy()}
+                {"random", () => new RandomStrategy()},
+                {"random2", () => new RandomStrategy()},
+                {"random3", () => new RandomStrategy()}
             };
         }
 
-        public IStrategy GetHumanStrategy(IUserInterface ui)
+        public IStrategy GetHumanStrategy(IUserInterface ui, string playerName)
         {
-            return new HumanStrategy(ui);
+            return new HumanStrategy(ui, playerName);
         }
 
         public IEnumerable<IStrategy> GetAllRobots()
