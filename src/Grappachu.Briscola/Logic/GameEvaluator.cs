@@ -1,39 +1,62 @@
 using System.Collections.Generic;
 using System.Linq;
-using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Model;
-using Grappachu.Briscola.Utils;
 
 namespace Grappachu.Briscola.Logic
 {
-    // Step 3: Raccolgo la logica "complessa" del gioco in una classe
-    public class GameEvaluator : IGameEvaluator
+    /// <summary>
+    ///     Fornisce un'insieme di metodi per la valutazione dello stato di gioco per la Briscola
+    /// </summary>
+    public static class BriscolaUtils
     {
-        public GameEvaluator()
+
+        /// <summary>
+        ///     Valuta lo stato del piatto e restituisce l'indice del giocatore che si aggiudica la mano
+        /// </summary>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int Evaluate(this GameState state)
         {
-            
-        }
-        
-        public int Assign(GameState state)
-        {
-            var playerIdx = state.Evaluate();
-            var player = state.Players.ElementAt(playerIdx);
+            var briscola = state.Briscola.Seed;
+            Card winCard; // cerco la carta vincente della mano
 
-            Chat.GetUI().Strong(string.Format("{0} | VINCE ({1} punti)\n", player.Name.PadRight(8), Totalize(state.Dish)));
+            if (state.Dish.Any(x => x.Seed == briscola))
+            {
+                // se ci sono briscole sarà quella di maggior valore
+                winCard = state.Dish.Where(x => x.Seed == briscola).OrderByDescending(Order).First();
+            }
+            else
+            {
+                // altrimenti guardo il primo seme giocato
+                var first = state.Dish.First().Seed;
+                winCard = state.Dish.Where(x => x.Seed == first).OrderByDescending(Order).First();
+            }
 
-            // Un comodo metodo per far si che il giocatore raccolga le carte e le metta nel suo stack
-            player.Save(state.Dish);
-
-            //Pulisco il piatto
-            state.Dish.Clear();
-
+            // dall'ordine di gioco delle carte e dal giocatore di turno 
+            // determino chi ha giocato la carta vincente 
+            var winIdx = state.Dish.IndexOf(winCard);
+            var playerIdx = (winIdx + state.Turn) % state.Players.Count;
             return playerIdx;
         }
 
 
+        //Step 3: Una funzione statica che assegna un valore diverso ad asso e 3 
+        //        in modo da poterli ordinare facilmente
+        private static int Order(Card card)
+        {
+            if (card.Value == 1)
+                return 12;
+            if (card.Value == 3)
+                return 11;
+            return card.Value;
+        }
+        
 
-
-
+        /// <summary>
+        ///     Somma i punti di un insieme di carte secondo le regole del gioco della Briscola
+        /// </summary>
+        /// <param name="cards"></param>
+        /// <returns></returns>
         public static int Totalize(IEnumerable<Card> cards)
         {
             return cards.Select(x => x.Value).Sum(ValueToScore);

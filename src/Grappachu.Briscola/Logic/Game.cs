@@ -10,16 +10,14 @@ namespace Grappachu.Briscola.Logic
     public class BriscolaGame : IGame<GameState>
     {
         private readonly IDeckFactory _deckFactory;
-        private readonly IGameEvaluator _evaluator;
         private readonly IPlayerFactory _playerFactory;
         private readonly List<IPlayer> _subscribers;
         private IDeck _deck;
 
-        public BriscolaGame(IDeckFactory deckFactory, IPlayerFactory playerFactory, IGameEvaluator evaluator)
+        public BriscolaGame(IDeckFactory deckFactory, IPlayerFactory playerFactory)
         {
             _deckFactory = deckFactory;
             _playerFactory = playerFactory;
-            _evaluator = evaluator;
             _subscribers = new List<IPlayer>();
         }
 
@@ -68,8 +66,27 @@ namespace Grappachu.Briscola.Logic
                 loLook.Look(State);
             }
 
-            var winnerIdx = _evaluator.Assign(State);
+            var winnerIdx = AssignHand(State);
             State.Turn = winnerIdx;
+        }
+
+
+
+        public int AssignHand(GameState state)
+        {
+            var playerIdx = state.Evaluate();
+            var player = state.Players.ElementAt(playerIdx);
+
+            Chat.GetUI()
+                .Strong(string.Format("{0} | VINCE ({1} punti)\n", player.Name.PadRight(8), BriscolaUtils.Totalize(state.Dish)));
+
+            // Un comodo metodo per far si che il giocatore raccolga le carte e le metta nel suo stack
+            player.Save(state.Dish);
+
+            //Pulisco il piatto
+            state.Dish.Clear();
+
+            return playerIdx;
         }
 
         public void Refill()

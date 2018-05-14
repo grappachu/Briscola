@@ -1,3 +1,5 @@
+using Grappachu.Briscola.Model;
+
 namespace Grappachu.Briscola.Interfaces
 {
     /// <summary>
@@ -31,5 +33,12 @@ namespace Grappachu.Briscola.Interfaces
         ///     Richiamato alla fine di ogni turno di gioco permette di pescare le carte necessarie per il prossimo turno
         /// </summary>
         void Refill();
+
+        /// <summary>
+        ///     Valuta lo stato del piatto e restituisce l'indice del giocatore che si aggiudica la mano
+        /// </summary>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        int AssignHand(GameState state);
     }
 }

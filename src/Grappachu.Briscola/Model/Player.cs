@@ -24,15 +24,9 @@ namespace Grappachu.Briscola.Model
 
         public string Name { get; }
 
-        public IEnumerable<Card> HandCards
-        {
-            get { return _handCards; }
-        }
+        public IEnumerable<Card> HandCards => _handCards;
 
-        public IEnumerable<Card> Stack
-        {
-            get { return _stack; }
-        }
+        public IEnumerable<Card> Stack => _stack;
 
         public IStrategy Strategy { get; }
 
@@ -48,7 +42,9 @@ namespace Grappachu.Briscola.Model
         public void Take(Card card)
         {
             if (Strategy.IsHuman)
+            {
                 Chat.GetUI().Strong(string.Format("{0} | HAI PESCATO: {1} di {2}", Name.PadRight(8), card.Value, card.Seed));
+            }
             _handCards.Add(card);
         }
 

@@ -19,7 +19,7 @@ namespace Grappachu.Briscola.Test.Logic.Strategies
             _p3 = new Player(strategyMock.Object, "p3");
             _p4 = new Player(strategyMock.Object, "p4");
             _userInterfaceMock = new Mock<IUserInterface>();
-            _sut = new HumanStrategy(_userInterfaceMock.Object);
+            _sut = new HumanStrategy(_userInterfaceMock.Object, "pippo");
         }
 
 
@@ -39,7 +39,7 @@ namespace Grappachu.Briscola.Test.Logic.Strategies
             _p1.Take(new Card("Danari", 3));
 
             _userInterfaceMock.Setup(x => x.Send("request"));
-            _userInterfaceMock.Setup(x => x.Get()).Returns("1");
+            _userInterfaceMock.Setup(x => x.GetChoice()).Returns("1");
 
             var res = _sut.Choose(_p1, state);
 

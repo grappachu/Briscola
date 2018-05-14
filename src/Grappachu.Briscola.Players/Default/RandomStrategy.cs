@@ -16,5 +16,9 @@ namespace Grappachu.Briscola.Players.Default
         {
             // la strategia stupida non pensa
         }
+
+        public RandomStrategy() : base("random")
+        {
+        }
     }
 }
