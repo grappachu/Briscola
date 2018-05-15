@@ -10,6 +10,13 @@ namespace Grappachu.Briscola.Utils
             return Console.ReadLine();
         }
 
+        public string GetChoice()
+        {
+            var key = Console.ReadKey();
+            Console.WriteLine("");
+            return key.KeyChar.ToString();
+        }
+
         public void Send(string message)
         {
             Console.ForegroundColor = ConsoleColor.White;
@@ -20,7 +27,6 @@ namespace Grappachu.Briscola.Utils
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(message);
-
         }
 
         public void Custom(ConsoleColor color, string message)

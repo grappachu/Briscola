@@ -8,6 +8,16 @@ namespace Grappachu.Briscola.Interfaces
     public interface IStrategy
     {
         /// <summary>
+        ///     Ottiene un valore che indica che la strategia richiede una interazione con l'utente
+        /// </summary>
+        bool IsHuman { get; }
+
+        /// <summary>
+        ///     Ottiene il nome di questa strategia
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         ///     Viene richiamato ad ogni turno di gioco da parte di un giocatore per chiedergli di giocare una carta
         /// </summary>
         /// <param name="player"></param>
@@ -21,10 +31,5 @@ namespace Grappachu.Briscola.Interfaces
         /// <param name="player"></param>
         /// <param name="state"></param>
         void Watch(IPlayer player, GameState state);
-
-        /// <summary>
-        /// Ottiene un valore che indica che la strategia richiede una interazione con l'utente
-        /// </summary>
-        bool IsHuman { get; }   
     }
 }

@@ -28,7 +28,7 @@ namespace Grappachu.Briscola.Test
             _gameMock.Setup(x => x.Join(It.IsAny<string>(), It.IsAny<IStrategy>()));
             _strategyFactory.Setup(x => x.GetAllRobots()).Returns(new[] {new RandomStrategy()});
 
-            _sut.Initialize();
+            _sut.InitializeHumanGame(4);
 
             _gameMock.Verify(m => m.Join(It.IsAny<string>(), It.IsAny<IStrategy>()), Times.AtLeast(2));
         }
@@ -41,7 +41,9 @@ namespace Grappachu.Briscola.Test
             _gameMock.SetupGet(x => x.State).Returns(new GameState(new List<IPlayer>
                 {
                     new Player(null, "A", new Card[0]),
-                    new Player(null, "B", new Card[0])
+                    new Player(null, "B", new Card[0]),
+                    new Player(null, "C", new Card[0]),
+                    new Player(null, "D", new Card[0])
                 },
                 new Card("Brisocla", 1)));
 

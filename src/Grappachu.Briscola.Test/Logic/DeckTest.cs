@@ -12,7 +12,7 @@ namespace Grappachu.Briscola.Test.Logic
     {
         public DeckTest()
         {
-            var seeds = new[] {"Cuori", "Picche", "Quadri", "Fiori"};
+            var seeds = new[] { "Cuori", "Picche", "Quadri", "Fiori" };
             var valueRange = new Range(1, 13);
             _sut = new Deck(seeds, valueRange);
         }
@@ -26,13 +26,13 @@ namespace Grappachu.Briscola.Test.Logic
             var enumerable = _sut as IEnumerable<Card>;
 
             enumerable.Should().Not.Be.Null();
+            _sut.Count.Should().Be(52);
         }
 
-        // Step 1: Verifico che la creazione del mazzo di un mazzo banale sia esattamente come me la aspetto
-        [Fact]
+        [Fact(DisplayName = "L'inizializzazione del mazzo deve essere dinamica, per semi e valori")]
         public void Deck_should_initialize_dynamilcally_with_seeds_and_values()
         {
-            var seeds = new[] {"Coppe", "Spade"};
+            var seeds = new[] { "Coppe", "Spade" };
             var valueRange = new Range(1, 3);
 
             // uso un nuovo sut in modo da non dipendere dagli altri test
@@ -47,13 +47,13 @@ namespace Grappachu.Briscola.Test.Logic
                     new Card("Spade", 3));
         }
 
-        // Step 2: Creo un metodo per vedere l'ultima carta del mazzo senza rimuoverla  (Briscola)
+        //  Creo un metodo per vedere l'ultima carta del mazzo senza rimuoverla  (Briscola)
         //         Si poteva usare direttamente il Last() dal momento che il deck è IEnumerable 
         //         ma è utile fare un metodo nell'interfaccia per poterlo mockare facilmente
-        [Fact]
+        [Fact(DisplayName = "Deve poter vedere l'ultima carta del mazzo che sarà la briscola")]
         public void PeekLast_should_look_at_last_card_without_removing_it()
         {
-            var seeds = new[] {"Coppe", "Spade"};
+            var seeds = new[] { "Coppe", "Spade" };
             var valueRange = new Range(1, 3);
             IDeck sut = new Deck(seeds, valueRange);
             var expected = sut.Last();
@@ -66,10 +66,10 @@ namespace Grappachu.Briscola.Test.Logic
         }
 
 
-        [Fact]
+        [Fact(DisplayName = "Pesca di una carta")]
         public void Pop_should_take_first_card_of_Deck_removing_it()
         {
-            var seeds = new[] {"Coppe", "Spade"};
+            var seeds = new[] { "Coppe", "Spade" };
             var valueRange = new Range(1, 3);
             IDeck sut = new Deck(seeds, valueRange);
             var expected = sut.First();
@@ -80,9 +80,8 @@ namespace Grappachu.Briscola.Test.Logic
             sut.Should().Not.Contain(card);
             sut.Count().Should().Be(5);
         }
-
-        // Step 1: Verifico che il mescolamento restituisca risultati diversi.
-        [Fact]
+        
+        [Fact(DisplayName = "Il mescolamento non deve essere idempotente")]
         public void Shuffle_should_change_cards_order_at_every_time()
         {
             _sut.Shuffle();

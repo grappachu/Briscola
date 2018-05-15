@@ -46,10 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IStrategyFactory.cs" />
-    <Compile Include="Logic\GameStateExtension.cs" />
     <Compile Include="Interfaces\IDeckFactory.cs" />
     <Compile Include="Interfaces\IGame.cs" />
-    <Compile Include="Interfaces\IGameEvaluator.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IStrategy.cs" />
     <Compile Include="Interfaces\IUserInterface.cs" />

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Grappachu.Briscola.Test.Logic
 {
-    // Step 2: Testo una factory affinchè mi restituisca un mazzo di tipo italiano
+   
     public class ItalianDeckFactoryTest
     {
         public ItalianDeckFactoryTest()
