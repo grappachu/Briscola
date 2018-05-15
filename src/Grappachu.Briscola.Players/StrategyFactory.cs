@@ -4,6 +4,7 @@ using System.Linq;
 using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Players.Default;
 using Grappachu.Briscola.Players.Human;
+using Grappachu.Briscola.Players.zaninig.Model;
 
 namespace Grappachu.Briscola.Players
 {
@@ -16,7 +17,7 @@ namespace Grappachu.Briscola.Players
             _roboFactories = new Dictionary<string, Func<IStrategy>>
             {
                 {"random", () => new RandomStrategy()},
-                {"random2", () => new RandomStrategy()},
+                {"ilmior", () => new IlmiorStrategy()},
                 {"random3", () => new RandomStrategy()}
             };
         }
