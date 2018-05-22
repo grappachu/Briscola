@@ -26,5 +26,6 @@ namespace Grappachu.Briscola.Interfaces
 
         void Save(IEnumerable<Card> cards);
         void Look(GameState state);
+         
     }
 }

@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameRunnerTest.cs" />
+    <Compile Include="Logic\CardTest.cs" />
     <Compile Include="Logic\Strategies\HumanStrategyTest.cs" />
     <Compile Include="Logic\DeckTest.cs" />
     <Compile Include="Logic\BriscolaUtilsTest.cs" />

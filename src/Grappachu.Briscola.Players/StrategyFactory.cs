@@ -4,6 +4,7 @@ using System.Linq;
 using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Players.Default;
 using Grappachu.Briscola.Players.Human;
+using Grappachu.Briscola.Players.prenassid;
 using Grappachu.Briscola.Players.zaninig.Model;
 
 namespace Grappachu.Briscola.Players
@@ -18,7 +19,7 @@ namespace Grappachu.Briscola.Players
             {
                 {"random", () => new RandomStrategy()},
                 {"ilmior", () => new IlmiorStrategy()},
-                {"random3", () => new RandomStrategy()}
+                {GrappachuStrategy.StrategyName, () => new GrappachuStrategy()}
             };
         }
 

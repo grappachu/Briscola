@@ -10,7 +10,7 @@ namespace Grappachu.Briscola.Test.Logic
         [Fact]
         public void Score_of_deck_should_be_120()
         {
-            var deck = new Deck(new[] {"A", "B", "C", "D"}, new Range(1, 10));
+            var deck = new Deck(new[] { "A", "B", "C", "D" }, new Range(1, 10));
 
             var res = BriscolaUtils.Totalize(deck);
 
