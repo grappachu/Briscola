@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Default\StrategyBase.cs" />
     <Compile Include="prenassid\Constraints.cs" />
+    <Compile Include="prenassid\Utils\CardExtension.cs" />
     <Compile Include="prenassid\Utils\GameStateExtensions.cs" />
     <Compile Include="prenassid\Handlers\DefaultRoundHandler.cs" />
     <Compile Include="prenassid\GrappachuStrategy.cs" />

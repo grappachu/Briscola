@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Grappachu.Briscola.Interfaces;
+using Grappachu.Briscola.Logic;
 using Grappachu.Briscola.Model;
 
 namespace Grappachu.Briscola.Players.prenassid.Utils
@@ -11,7 +12,8 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
         /// </summary>
         public static IPlayer GetWinning(this GameState state)
         {
-            return state.Players.ElementAt(1);
+            var winnerIdx = state.Evaluate();
+            return state.Players.ElementAt(winnerIdx);
         }
 
         /// <summary>
@@ -34,5 +36,18 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
             }
             return false;
         }
+
+
+        /// <summary>
+        /// Ottiene un valore che indica che la carta da giocare è vincente sul piatto corrente
+        /// </summary>
+        /// <param name="xstate"></param>
+        /// <param name="myCard"></param>
+        /// <returns></returns>
+        public static bool CanTake(this GameState xstate, Card myCard)
+        {
+            return myCard.IsWinning(xstate.Dish, xstate.Briscola);
+        }
+
     }
 }

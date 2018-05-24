@@ -15,7 +15,8 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
         /// <returns></returns>
         public static Card Carica(this IPlayer me, GameState state)
         {
-            return me.HandCards.OrderByDescending(x => OrderCarica(x, state.Briscola)).First();
+            var sortedCards = me.HandCards.OrderByDescending(x => OrderCarica(x, state.Briscola)).ToArray();
+            return sortedCards.First();
         }
 
         private static int OrderCarica(Card c, Card briscola)

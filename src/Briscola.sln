@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grappachu.Briscola.Strategi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grappachu.Briscola.UI", "Grappachu.Briscola.UI\Grappachu.Briscola.UI.csproj", "{86DAC69D-0DBB-4C92-AD29-BFB25D2F6178}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grappachu,Briscola.Strategies.Test", "Grappachu,Briscola.Strategies.Test\Grappachu,Briscola.Strategies.Test.csproj", "{79251FFF-4472-433E-813E-D0B8EE4998E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grappachu.Briscola.Strategies.Test", "Grappachu,Briscola.Strategies.Test\Grappachu.Briscola.Strategies.Test.csproj", "{79251FFF-4472-433E-813E-D0B8EE4998E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,7 @@ using Grappachu.Briscola.Logic;
 using Grappachu.Briscola.Model;
 using Grappachu.Briscola.Players.Default;
 
-namespace Grappachu_Briscola.Strategies.Test.prenassid
+namespace Grappachu.Briscola.Strategies.Test.prenassid
 {
     public static class StateFixture
     {
@@ -19,17 +19,17 @@ namespace Grappachu_Briscola.Strategies.Test.prenassid
             List<IPlayer> players = new List<IPlayer>();
             for (int i = 0; i < 4; i++)
             {
-                if (turn + i % 4 != dish.Length)
+                if ((4-turn + i) % 4 != dish.Length)
                 {
-                    players.Add(new Player(new RandomStrategy(), "p" + i));
+                    players.Add(new Player(new RandomStrategy(), "p" + i + 1));
                 }
                 else
                 {
-                    players.Add(new Player(sut, "p" + i));
+                    players.Add(new Player(sut, "p" + i + 1));
                 }
             }
 
-            GameState gameState = new GameState(players, briscola);
+            GameState gameState = new GameState(players, briscola) { Turn = turn };
             foreach (var player in players)
             {
                 if (player.Strategy == sut)
@@ -44,8 +44,8 @@ namespace Grappachu_Briscola.Strategies.Test.prenassid
                     player.Take(deck.Pop());
                     player.Take(deck.Pop());
                     player.Take(deck.Pop());
-                } 
-            } 
+                }
+            }
 
             foreach (var card in dish)
             {

@@ -10,8 +10,8 @@
     <ProjectGuid>{79251FFF-4472-433E-813E-D0B8EE4998E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Grappachu_Briscola.Strategies.Test</RootNamespace>
-    <AssemblyName>Grappachu,Briscola.Strategies.Test</AssemblyName>
+    <RootNamespace>Grappachu.Briscola.Strategies.Test</RootNamespace>
+    <AssemblyName>Grappachu.Briscola.Strategies.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -79,7 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="prenassid\GrappachuStrategyTest.cs" />
+    <Compile Include="prenassid\P4R4HandlerTest.cs" />
     <Compile Include="prenassid\StateFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
