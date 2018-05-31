@@ -64,7 +64,7 @@ namespace Grappachu.Briscola.UI
 
         private static bool IsExit(string command)
         {
-            return string.Equals(command, "Q", StringComparison.OrdinalIgnoreCase);
+            return string.Equals(command, "x", StringComparison.OrdinalIgnoreCase);
         }
 
         private static void RunRobotMatch( int matches = 100)

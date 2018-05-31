@@ -3,13 +3,13 @@ using System.Linq;
 using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Logic;
 using Grappachu.Briscola.Model;
+using Grappachu.Briscola.Players.prenassid.Utils;
 
 namespace Grappachu.Briscola.Players.prenassid
 {
     public class Watcher
     {
         private readonly IList<Card> _unplayedCards = new List<Card>();
-        private IEnumerable<Card> _myCards;
 
         public Watcher()
         {
@@ -27,18 +27,16 @@ namespace Grappachu.Briscola.Players.prenassid
                 _unplayedCards.Remove(card);
             }
 
-            _myCards = myself.HandCards;
         }
 
         /// <summary>
         /// Ottiene tutte le carte non giocate escluse le mie
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Card> GetUnknownCards()
+        public IEnumerable<Card> GetUnknownCards(IPlayer myself)
         {
-            var res = _unplayedCards.Where(x => !_myCards.Contains(x)).ToArray();
+            var res = _unplayedCards.Where(x => !myself.HandCards.Contains(x)).ToArray();
             return res;
         }
-
     }
 }

@@ -79,6 +79,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="prenassid\P4R1HandlerTest.cs" />
+    <Compile Include="prenassid\P4R2HandlerTest.cs" />
+    <Compile Include="prenassid\P4R3HandlerTest.cs" />
     <Compile Include="prenassid\P4R4HandlerTest.cs" />
     <Compile Include="prenassid\StateFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

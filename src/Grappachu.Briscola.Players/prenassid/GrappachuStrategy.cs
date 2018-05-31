@@ -17,6 +17,9 @@ namespace Grappachu.Briscola.Players.prenassid
             _watcher = new Watcher();
             _roundHandler = new P4R4Handler();
             _roundHandler
+                .SetSuccessor(new P4R3Handler())
+                .SetSuccessor(new P4R2Handler())
+                .SetSuccessor(new P4R1Handler())
                 .SetSuccessor(new DefaultRoundHandler());
         }
 

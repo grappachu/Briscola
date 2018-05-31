@@ -54,6 +54,9 @@
   <ItemGroup>
     <Compile Include="Default\StrategyBase.cs" />
     <Compile Include="prenassid\Constraints.cs" />
+    <Compile Include="prenassid\Handlers\P4R1Handler.cs" />
+    <Compile Include="prenassid\Handlers\P4R2Handler.cs" />
+    <Compile Include="prenassid\Handlers\P4R3Handler.cs" />
     <Compile Include="prenassid\Utils\CardExtension.cs" />
     <Compile Include="prenassid\Utils\GameStateExtensions.cs" />
     <Compile Include="prenassid\Handlers\DefaultRoundHandler.cs" />

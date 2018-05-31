@@ -74,6 +74,16 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
         }
 
         /// <summary>
+        /// Somma i punti di una lista di carte
+        /// </summary>
+        /// <param name="cards"></param>
+        /// <returns></returns>
+        public static int GetScore(this IEnumerable<Card> cards)
+        {
+            return cards.Sum(x => x.GetScore());
+        }
+
+        /// <summary>
         /// Ottiene la carta di minor valore da un elenco
         /// </summary>
         /// <param name="cards"></param>
