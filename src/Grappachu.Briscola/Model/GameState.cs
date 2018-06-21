@@ -22,6 +22,6 @@ namespace Grappachu.Briscola.Model
         public Card Briscola { get; internal set; }
         public IReadOnlyCollection<IPlayer> Players { get; private set; }
         public int Turn { get; set; }
-        public IList<Card> Dish { get; }
+        public IList<Card> Dish { get; } 
     }
 }

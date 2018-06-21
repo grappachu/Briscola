@@ -12,5 +12,10 @@ namespace Grappachu.Briscola.Model
 
         public string Seed { get; }
         public int Value { get; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}-{1:00}", Seed, Value);
+        }
     }
 }
