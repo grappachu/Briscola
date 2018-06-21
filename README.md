@@ -7,33 +7,41 @@ A simple game for "Italian Briscola" made with a TDD approach
 
 Even if project is intended for fun with my office-mates, every contribute or suggestion is welcome.
 
-###How to
+### How to
 
-First clone the repository
+There are three ways to contribute:
 
-	git clone https://github.com/grappachu/Briscola.git
+#### 1. By Fork
 
-and initialize git flow
+Fork repository into your GitHub account, then create your strategy and make a pull request when ready
 
-	git flow init
+#### 2. As Contributor
 
-Then start your feature for your strategy naming it as 
+Send me a message and i will add your account to contributors
 
-`surname`+`first-letter-of-name`
+#### 3. Offline
 
-so the command will be like
+Clone repo, write your code, send me files and I will do the merge
 
-	git flow feature start prenassid
 
-**You are now ready to start coding!**
+Then create your own strategy branch naming it as 
 
-1. Create a folder for your strategy named as the feature in project
+
+
+###Coding Rules
+
+1. Create a folder for your strategy in project
 
 	    Grappachu.Briscola.Strategies
 
+	The name should looks like 
+
+		feature/[surname]+[first-letter-of-name]
+
+
 2. Build your strategy by extending class StrategyBase
 3. Give it a great name (best if ascii lowercase)
-4. Register your strategy in the `StrategyFactory.cs` possibly with the name you provided previously
+4. Register your strategy in the `StrategyFactory.cs` (possibly with the name you provided previously)
 
 	 	{"awesome-player", () => new AwesomeStrategy()},
 	   
