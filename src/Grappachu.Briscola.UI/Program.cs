@@ -16,8 +16,8 @@ namespace Grappachu.Briscola.UI
         private static StrategyFactory _strategyFactory;
         private static IUserInterface _ui;
         private static Version _version;
-          
-       
+
+
         private static void Main()
         {
             _strategyFactory = new StrategyFactory();
@@ -50,10 +50,12 @@ namespace Grappachu.Briscola.UI
                         Run4PlayerGame();
                         break;
                     case "3":
-                        RunRobotMatch();
+                        var numGames = _ui.GetInt("Quante partite vuoi giocare? (default = 100)", 100);
+                        RunRobotMatch(numGames);
                         break;
-                    case "4": 
-                        var tournamentRunner = new BergerPairing(_strategyFactory, 100);
+                    case "4":
+                        var tournamentSingleGames = _ui.GetInt("Quante partite vuoi giocare per ogni match? (default = 1000)", 1000);
+                        var tournamentRunner = new BergerPairing(_strategyFactory, tournamentSingleGames);
                         tournamentRunner.Run();
                         break;
                 }
@@ -67,23 +69,35 @@ namespace Grappachu.Briscola.UI
             return string.Equals(command, "x", StringComparison.OrdinalIgnoreCase);
         }
 
-        private static void RunRobotMatch( int matches = 100)
+        private static void RunRobotMatch(int matches)
         {
             int matchId = 1;
             var ui = Chat.GetUI();
 
-            ui.Send("Inserisci il nome del primo robot");
-            var strategyHome = ui.Get();
+            var allStrategies = _strategyFactory.GetAllRobots().Select(s => s.Name).ToArray();
+            ui.Send("Robot disponibili:");
+            for (int i = 0; i < allStrategies.Length; i++)
+            {
+                ui.Send($" {i + 1} | {allStrategies[i]}");
+            }
+            ui.Send("");
+            ui.Send(" 0 | Annulla");
 
-            ui.Send("Inserisci il nome del secondo robot");
-            var strategyVisitor = ui.Get();
+            ui.Send("");
+            var s1Choiche = ui.GetInt("Scegli il primo robot", null);
+            var s2Choiche = ui.GetInt("Scegli il secondo robot", null);
+            var strategyHome = allStrategies[s1Choiche - 1];
+            var strategyVisitor = allStrategies[s2Choiche - 1];
 
-            List<Tuple<int, int>> scores = new List<Tuple<int, int>>();
+            var numPlayers = ui.GetInt("Scegli il numero di giocatori (default = 4)", 4);
+
+
+            var scores = new List<Tuple<int, int>>();
             for (int i = 0; i < matches; i++)
             {
                 var g = new BriscolaGame(new ItalianDeckFactory(), new PlayerFactory());
                 var runner = new GameRunner(g, ui, _strategyFactory);
-                runner.InitializeRoboMatch(strategyHome, strategyVisitor, 4);
+                runner.InitializeRoboMatch(strategyHome, strategyVisitor, numPlayers);
                 var result = runner.Play();
                 scores.Add(result);
             }

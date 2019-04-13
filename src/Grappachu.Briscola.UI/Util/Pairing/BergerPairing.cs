@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Logic;
@@ -26,40 +28,49 @@ namespace Grappachu.Briscola.UI.Util.Pairing
             var totalTurns = BergerTables.GetRounds(allStrategies.Length);
             int[] allScores = new int[allStrategies.Length];
 
+            Chat.GetUI().Send(string.Empty);
+            var detail = 9 == Chat.GetUI().GetInt("Premi invio per contiunare in modalità rapida oppure 9 per la modalità dettagliata", 0);
+
             Chat.GetUI().Strong("  HA INIZIO IL GRANDE TORNEO DEI ROBOT!");
-            Chat.GetUI().Strong("  Sono previsti: " + totalTurns + " scontri");
+            Chat.GetUI().Strong($"  Oggi {DateTime.Now:dd MMMM yyyy alle HH:mm}");
+            Chat.GetUI().Strong($"  si giocheranno: {totalTurns} turni");
+            Chat.GetUI().Strong($"  ad incontri da {SingleRounds} partite");
 
             for (int i = 0; i < totalTurns; i++)
             {
+                Chat.GetUI().Send(string.Empty);
                 Chat.GetUI().Strong(" >>>>>>>> TURNO " + (i + 1) + " <<<<<<<<<");
                 var games = BergerTables.GetRoundMatches(allStrategies.Length, i);
 
                 foreach (var game in games)
                 {
+                    var homeIndex = game.Home - 1;
+                    var visitorIndex = game.Visitor - 1;
+
                     // Vittorie a Forfait con numero dispari di giocatori
-                    if (allStrategies.Length <= game.Visitor)
+                    if (allStrategies.Length <= visitorIndex)
                     {
-                        allScores[game.Home] += 2;
-                        Chat.GetUI().Strong(string.Format(" => {0} vince a forfait", allStrategies.ElementAt(game.Home)));
+                        allScores[homeIndex] += 2;
+                        Chat.GetUI().Send(string.Format(" => {0} vince a forfait", allStrategies.ElementAt(homeIndex).Name));
                         continue;
                     }
-                    if (allStrategies.Length <= game.Home)
+                    if (allStrategies.Length <= homeIndex)
                     {
-                        allScores[game.Visitor] += 2; // Vittoria a Forfait
-                        Chat.GetUI().Strong(string.Format(" => {0} vince a forfait", allStrategies.ElementAt(game.Visitor)));
+                        allScores[visitorIndex] += 2; // Vittoria a Forfait
+                        Chat.GetUI().Send(string.Format(" => {0} vince a forfait", allStrategies.ElementAt(visitorIndex).Name));
                         continue;
                     }
                     // -----
 
-                    var homeStrategy = allStrategies.ElementAt(game.Home);
-                    var visitorStrategy = allStrategies.ElementAt(game.Visitor);
-                    Chat.GetUI().Strong(string.Format(" => {0} vs. {1}", homeStrategy.Name, visitorStrategy.Name));
+                    var homeStrategy = allStrategies.ElementAt(homeIndex);
+                    var visitorStrategy = allStrategies.ElementAt(visitorIndex);
+
+                    Chat.Enabled = detail;
 
                     int partialHome = 0, partialVisitor = 0;
                     for (int j = 0; j < SingleRounds; j++)
                     {
                         var outcome = DoSingleMatch(Chat.GetUI(), j, homeStrategy, visitorStrategy);
-
                         switch (outcome)
                         {
                             case 0:
@@ -74,35 +85,46 @@ namespace Grappachu.Briscola.UI.Util.Pairing
                                 break;
                         }
                     }
-
-
                     var allGamesOutcome = GetOutcome(partialHome, partialVisitor);
-                    Chat.GetUI().Strong(string.Format(" => RISULTATO: {0} ({1}-{2})", allGamesOutcome, partialHome, partialVisitor));
+
+                    Chat.Enabled = true;
+
+                    Chat.GetUI().Send(string.Format(" => {0} vs. {1} | {2:####} - {3:####}",
+                        homeStrategy.Name.PadRight(15),
+                        visitorStrategy.Name.PadRight(15),
+                        partialHome, partialVisitor));
 
                     switch (allGamesOutcome)
                     {
                         case 0:
-                            allScores[game.Home] += 1;
-                            allScores[game.Visitor] += 1;
+                            allScores[homeIndex] += 1;
+                            allScores[visitorIndex] += 1;
                             break;
                         case 1:
-                            allScores[game.Home] += 2;
+                            allScores[homeIndex] += 2;
                             break;
                         case 2:
-                            allScores[game.Visitor] += 2;
+                            allScores[visitorIndex] += 2;
                             break;
                     }
                 }
-
             }
 
+            Chat.GetUI().Send(string.Empty);
             Chat.GetUI().Strong(" >>>>>>>> CLASSIFICA FINALE  <<<<<<<<<");
+
+            var scoreChart = new List<Tuple<string, int>>();
             for (int i = 0; i < allStrategies.Length; i++)
             {
-                Chat.GetUI().Send(string.Format("  {0} | {1}", allScores.ElementAt(i), allStrategies.ElementAt(i).Name));
+                var s = allStrategies.ElementAt(i);
+                var strategyName = s is IRobotStrategy strategy ? $"{strategy.Name} {strategy.Version} by {strategy.Author}" : s.Name;
+                scoreChart.Add(new Tuple<string, int>(strategyName, allScores.ElementAt(i)));
             }
-
-
+            var orderedChart = scoreChart.OrderByDescending(x => x.Item2);
+            foreach (var tuple in orderedChart)
+            {
+                Chat.GetUI().Send(string.Format("  {0} | {1}", tuple.Item2, tuple.Item1));
+            }
 
         }
 

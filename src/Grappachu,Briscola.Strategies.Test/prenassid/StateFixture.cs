@@ -9,13 +9,13 @@ namespace Grappachu.Briscola.Strategies.Test.prenassid
 {
     public static class StateFixture
     {
-        private static readonly IDeckFactory DeckFactory = new ItalianDeckFactory();
-        private static readonly Random Random = new Random();
+        private static readonly IDeckFactory XDeckFactory = new ItalianDeckFactory();
+        private static readonly Random XRandom = new Random();
 
         public static GameState Create4P(IStrategy sut, Card briscola, Card[] dish, Card[] handCards)
         {
-            var deck = DeckFactory.CreateDeck();
-            var turn = Random.Next(0, 4);
+            var deck = XDeckFactory.CreateDeck();
+            var turn = XRandom.Next(0, 4);
             List<IPlayer> players = new List<IPlayer>();
             for (int i = 0; i < 4; i++)
             {

@@ -81,6 +81,8 @@
   <ItemGroup>
     <Compile Include="prenassid\P4R1HandlerTest.cs" />
     <Compile Include="prenassid\P4R2HandlerTest.cs" />
+    <Compile Include="depratoa\AbercioStrategyTest.cs" />
+    <Compile Include="depratoa\CardExtensionsTest.cs" />
     <Compile Include="prenassid\P4R3HandlerTest.cs" />
     <Compile Include="prenassid\P4R4HandlerTest.cs" />
     <Compile Include="prenassid\StateFixture.cs" />
@@ -102,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.9.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="zaninig\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -3,7 +3,7 @@ using Grappachu.Briscola.Model;
 namespace Grappachu.Briscola.Interfaces
 {
     /// <summary>
-    ///     Rappresenta la strategia di gioco di per un giocatore
+    ///     Rappresenta la strategia di gioco di per un generico giocatore (umano o robot)
     /// </summary>
     public interface IStrategy
     {

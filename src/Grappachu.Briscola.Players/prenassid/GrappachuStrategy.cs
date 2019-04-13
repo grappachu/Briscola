@@ -1,13 +1,17 @@
-﻿using Grappachu.Briscola.Interfaces;
+﻿using System;
+using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Model;
 using Grappachu.Briscola.Players.Default;
 using Grappachu.Briscola.Players.prenassid.Handlers;
 
 namespace Grappachu.Briscola.Players.prenassid
 {
-    public class GrappachuStrategy : StrategyBase
+    public class GrappachuStrategy : StrategyBase, IRobotStrategy
     {
         public const string StrategyName = "tinto-briss";
+        private const string StrategyAuthor = "Davide Prenassi";
+        private const string StrategyVersion = "1.0.0";
+
         private readonly RoundHandler _roundHandler;
         private readonly Watcher _watcher;
 
@@ -22,6 +26,9 @@ namespace Grappachu.Briscola.Players.prenassid
                 .SetSuccessor(new P4R1Handler())
                 .SetSuccessor(new DefaultRoundHandler());
         }
+
+        public string Author => StrategyAuthor;
+        public Version Version => Version.Parse(StrategyVersion);
 
         protected override Card OnChoose(IPlayer myself, GameState state)
         {

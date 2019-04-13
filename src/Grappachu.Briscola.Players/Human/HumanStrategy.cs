@@ -16,7 +16,7 @@ namespace Grappachu.Briscola.Players.Human
             Name = name;
         }
 
-        public string Name { get; }
+        public string Name { get; } 
 
         public Card Choose(IPlayer playFor, GameState state)
         {
