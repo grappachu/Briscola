@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Model;
 
@@ -8,13 +9,14 @@ namespace Grappachu.Briscola.Players.Default
     /// </summary>
     public abstract class StrategyBase : IStrategy
     {
+
         protected StrategyBase(string strategyUniqueName)
         {
             Name = strategyUniqueName;
             IsHuman = false;
         }
 
-        public string Name { get; }
+        public string Name { get; } 
 
         public Card Choose(IPlayer player, GameState state)
         {

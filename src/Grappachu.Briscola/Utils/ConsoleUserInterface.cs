@@ -35,5 +35,28 @@ namespace Grappachu.Briscola.Utils
             Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
+
+        public int GetInt(string message, int? defaultValue, ConsoleColor color)
+        {
+            bool userInputValid;
+            int userValue;
+            do
+            {
+                Custom(color, message);
+                var userInput = Get();
+                if (string.IsNullOrEmpty(userInput) && defaultValue.HasValue)
+                {
+                    return defaultValue.Value;
+                }
+
+                userInputValid = int.TryParse(userInput, out userValue);
+                if (!userInputValid)
+                {
+                    Custom(ConsoleColor.Red, "Valore non valido");
+                }
+            } while (!userInputValid);
+
+            return userValue;
+        }
     }
 }

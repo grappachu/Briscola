@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default\StrategyBase.cs" />
+    <Compile Include="depratoa\AbercioStrategy.cs" />
+    <Compile Include="depratoa\CardExtensions.cs" />
     <Compile Include="prenassid\Constraints.cs" />
     <Compile Include="prenassid\Utils\CardExtension.cs" />
     <Compile Include="prenassid\Utils\GameStateExtensions.cs" />
