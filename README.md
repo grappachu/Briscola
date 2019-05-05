@@ -24,17 +24,20 @@ Here are the top robots players ...
 
 |#|Strategy|Author|Version|
 |-|--------|------|-------| 
-|1|Abercio10|Alessandro de Prato|1.0|
-|2|tinto-briss|Davide Prenassi|1.0|
-|3|ilmior|Gabriele Zanini|1.0|
-|4|random|(system)|1.0|
+|1|tinto-briss|Davide Prenassi|1.1|
+|2|Abercio10|Alessandro de Prato|1.0|
+|3|random|(system)|1.0|
+|4|ilmior|Gabriele Zanini|1.0|
 
-### Tournament results
+### Last execution result
 
 And here are the last execution results of tournaments...
 
-![](https://i.imgur.com/ijfBBta.png)
+ ![](https://i.imgur.com/bTrIw8S.png)
 
+### Older tournament results
+ 
+- [Tournament of 13/04/2019](https://github.com/grappachu/Briscola/blob/master/doc/TOURNAMENT_20190413.md)
 
 
 
