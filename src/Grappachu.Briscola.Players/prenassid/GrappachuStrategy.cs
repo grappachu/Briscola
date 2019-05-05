@@ -30,6 +30,7 @@ namespace Grappachu.Briscola.Players.prenassid
         public string Author => StrategyAuthor;
         public Version Version => Version.Parse(StrategyVersion);
 
+       
         protected override Card OnChoose(IPlayer myself, GameState state)
         {
             return _roundHandler.Choose(myself, state, _watcher);

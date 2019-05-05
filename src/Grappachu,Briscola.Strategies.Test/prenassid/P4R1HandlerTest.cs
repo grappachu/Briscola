@@ -15,11 +15,11 @@ namespace Grappachu.Briscola.Strategies.Test.prenassid
             _sut = new GrappachuStrategy();
         }
 
-        [Fact]
+        [Fact(DisplayName = "Alla prima mano: Deve andare liscio")]
         public void P1R4_deve_andare_liscio()
         {
             var briscola = new Card("Spade", 3);
-            var state = StateFixture.Create4P(_sut, briscola, new Card[] { },
+            var state = StateFixture.Create4P(_sut, false, briscola, new Card[] { },
                 new[]
                 {
                     new Card("Bastoni", 3),
@@ -33,11 +33,11 @@ namespace Grappachu.Briscola.Strategies.Test.prenassid
             card.Should().Be.EqualTo(new Card("Danari", 2));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Alla prima mano: Deve preferire la carta franca")]
         public void P1R4_deve_preferire_carta_franca()
         {
             var briscola = new Card("Spade", 3);
-            var previousHand = StateFixture.Create4P(_sut, briscola, new[] 
+            var previousHand = StateFixture.Create4P(_sut, false, briscola, new[] 
                 {
                     new Card("Coppe", 2),
                     new Card("Danari", 9),
@@ -45,7 +45,7 @@ namespace Grappachu.Briscola.Strategies.Test.prenassid
                     new Card("Spade", 8) 
                 },
                 new Card[] { });
-            var state = StateFixture.Create4P(_sut, briscola, new Card[] { },
+            var state = StateFixture.Create4P(_sut, false,briscola, new Card[] { },
                 new[]
                 {
                     new Card("Bastoni", 5),
@@ -59,8 +59,6 @@ namespace Grappachu.Briscola.Strategies.Test.prenassid
 
             card.Should().Be.EqualTo(new Card("Coppe", 4));
         }
-
-
-
+         
     }
 }

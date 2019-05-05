@@ -1,10 +1,13 @@
-﻿using Grappachu.Briscola.Interfaces;
+﻿using System;
+using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Model;
 
 namespace Grappachu.Briscola.Players.prenassid.Handlers
 {
     public abstract class RoundHandler
     {
+        protected static readonly Random Rand = new Random();
+
         private RoundHandler _successor;
 
         public RoundHandler SetSuccessor(RoundHandler nextHandler)
