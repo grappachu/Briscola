@@ -25,7 +25,7 @@ namespace Grappachu.Briscola.Players.prenassid.Handlers
                 }
 
                 // se non vale la pena sta fuori
-                var resighChoice = StaiFuori(myself, state);
+                var resighChoice = myself.StaiFuori(state);
                 if (resighChoice.HasValue)
                 {
                     return resighChoice.Value;
@@ -82,7 +82,7 @@ namespace Grappachu.Briscola.Players.prenassid.Handlers
         /// <returns></returns>
         private static Card? GetMyBestTakingChoice(IPlayer myself, GameState state)
         {
-            var winningCards = myself.HandCards.Where(x => x.IsWinning(state)).ToArray();
+            var winningCards = myself.GetWinningCards(state);
             if (winningCards.Any())
             {
                 var winningCardWithoutBriscola = winningCards.Where(x => x.Seed != state.Briscola.Seed).ToArray();
@@ -97,23 +97,7 @@ namespace Grappachu.Briscola.Players.prenassid.Handlers
             return null;
         }
 
-        /// <summary>
-        /// Ottiene la carta più bassa che non prende la mano
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="state"></param>
-        /// <returns></returns>
-        private static Card? StaiFuori(IPlayer player, GameState state)
-        {
-            var notWinningCards = player.HandCards.Where(x => !x.IsWinning(state)).ToArray(); 
-            if (notWinningCards.Any())
-            {
-                return notWinningCards.GetLowest();
-            } 
-            return null;
-        }
-
-
+       
         protected override bool OnCanHandle(IPlayer myself, GameState state)
         {
             return state.Players.Count == 4 && state.Dish.Count == 3;

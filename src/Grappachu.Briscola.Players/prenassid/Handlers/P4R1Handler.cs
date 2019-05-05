@@ -30,6 +30,7 @@ namespace Grappachu.Briscola.Players.prenassid.Handlers
                     minPoints = overPoints;
                 }
             }
+         
             return toPlay;
         }
 

@@ -11,22 +11,19 @@ namespace Grappachu.Briscola.Strategies.Test.prenassid
     {
         private static readonly IDeckFactory XDeckFactory = new ItalianDeckFactory();
         private static readonly Random XRandom = new Random();
+         
 
-        public static GameState Create4P(IStrategy sut, Card briscola, Card[] dish, Card[] handCards)
+        public static GameState Create4P(IStrategy sut, bool withPartner, Card briscola, Card[] dish, Card[] handCards)
         {
             var deck = XDeckFactory.CreateDeck();
             var turn = XRandom.Next(0, 4);
-            List<IPlayer> players = new List<IPlayer>();
+            var players = new List<IPlayer>();
             for (int i = 0; i < 4; i++)
             {
-                if ((4-turn + i) % 4 != dish.Length)
-                {
-                    players.Add(new Player(new RandomStrategy(), "p" + i + 1));
-                }
-                else
-                {
-                    players.Add(new Player(sut, "p" + i + 1));
-                }
+                var div = withPartner ? 2 : 4;
+                players.Add((4 - turn + i) % div != dish.Length
+                    ? new Player(new RandomStrategy(), "p" + i + 1)
+                    : new Player(sut, "p" + i + 1));
             }
 
             GameState gameState = new GameState(players, briscola) { Turn = turn };

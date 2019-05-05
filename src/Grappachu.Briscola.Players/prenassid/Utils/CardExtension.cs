@@ -7,7 +7,7 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
     public static class CardExtension
     {
         /// <summary>
-        /// Ottiene un valore che indica che, data la briscola, la carta è vincente sul piatto
+        ///     Ottiene un valore che indica che, data la briscola, la carta è vincente sul piatto
         /// </summary>
         /// <param name="myCard">La carta per cui viene effettuata la valutazione</param>
         /// <param name="dish">Elenco ordinato delle carte sul piatto</param>
@@ -40,7 +40,7 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
         }
 
         /// <summary>
-        /// Ottiene un valore che indica che, data la briscola, la carta è vincente sul piatto
+        ///     Ottiene un valore che indica che, data la briscola, la carta è vincente sul piatto
         /// </summary>
         /// <param name="myCard">La carta per cui viene effettuata la valutazione</param>
         /// <param name="state">Stato del gioco su cui viene effettuato il confronto</param>
@@ -50,7 +50,7 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
         }
 
         /// <summary>
-        /// Ottiene i punti di una carta
+        ///     Ottiene i punti di una carta
         /// </summary>
         /// <param name="card"></param>
         /// <returns></returns>
@@ -74,7 +74,7 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
         }
 
         /// <summary>
-        /// Somma i punti di una lista di carte
+        ///     Somma i punti di una lista di carte
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
@@ -84,32 +84,48 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
         }
 
         /// <summary>
-        /// Ottiene la carta di minor valore da un elenco
+        ///     Ottiene la carta di minor valore da un elenco
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
         public static Card GetLowest(this IEnumerable<Card> cards)
         {
-            return cards.OrderBy(GetValueOrder).First();
+            return cards.OrderBy(GetOrderValue).First();
         }
 
         /// <summary>
-        /// Ottiene la carta di maggior valore da un elenco
+        ///     Ottiene la carta di maggior valore da un elenco
         /// </summary>
         /// <param name="cards"></param>
         /// <returns></returns>
         public static Card GetHighest(this IEnumerable<Card> cards)
         {
-            return cards.OrderBy(GetValueOrder).Last();
+            return cards.OrderBy(GetOrderValue).Last();
         }
 
-        private static int GetValueOrder(Card card)
+        /// <summary>
+        /// Ottiene un valore numerico che indica l'ordine della carta nell'ordine del gioco (numero basso = minor valore)
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
+        private static int GetOrderValue(this Card card)
         {
             if (card.Value == 1)
                 return 12;
             if (card.Value == 3)
                 return 11;
             return card.Value;
+        }
+
+
+        /// <summary>
+        ///     Ottiene un valore che indica che la carta è un carico
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
+        public static bool IsCarico(this Card card)
+        {
+            return card.Value == 1 || card.Value == 3;
         }
     }
 }

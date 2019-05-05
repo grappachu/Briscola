@@ -8,7 +8,7 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
     internal static class GameStateExtensions
     {
         /// <summary>
-        /// Ottiene il giocatore che allo stato attuale si sta aggiudicando il piatto
+        ///     Ottiene il giocatore che allo stato attuale si sta aggiudicando il piatto
         /// </summary>
         public static IPlayer GetWinning(this GameState state)
         {
@@ -17,7 +17,7 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
         }
 
         /// <summary>
-        /// Indica se due giocatori sono compagni
+        ///     Indica se due giocatori sono compagni
         /// </summary>
         /// <param name="state"></param>
         /// <param name="p1"></param>
@@ -26,7 +26,7 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
         public static bool ArePartners(this GameState state, IPlayer p1, IPlayer p2)
         {
             if (state.Players.Count != 4) return false;
-            for (int i = 0; i < 4; i++)
+            for (var i = 0; i < 4; i++)
             {
                 // prende i giocatori a due a due
                 if (state.Players.ElementAt(i) == p1 && state.Players.ElementAt((i + 2) % 4) == p2)
@@ -34,19 +34,30 @@ namespace Grappachu.Briscola.Players.prenassid.Utils
                     return true;
                 }
             }
+
             return false;
         }
 
+        /// <summary>
+        ///     Ottiene la somma dei punti attualmente sul piatto
+        /// </summary>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public static int GetDishPoints(this GameState state)
+        {
+            var points = state.Dish.Sum(c => c.GetScore());
+            return points;
+        }
 
         /// <summary>
-        /// Ottiene un valore che indica che la carta da giocare è vincente sul piatto corrente
+        /// Ottiene un valore che indica che sul piatto è presente almeno una briscola
         /// </summary>
-        /// <param name="xstate"></param>
-        /// <param name="myCard"></param>
+        /// <param name="state"></param>
         /// <returns></returns>
-        public static bool CanTake(this GameState xstate, Card myCard)
+        public static bool IsBriscolaPlayed(this GameState state)
         {
-            return myCard.IsWinning(xstate.Dish, xstate.Briscola);
+            var briscola = state.Briscola.Seed;
+            return state.Dish.Any(c => c.Seed == briscola);
         }
 
     }

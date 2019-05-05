@@ -66,6 +66,7 @@
     <Compile Include="prenassid\Handlers\RoundHandler.cs" />
     <Compile Include="prenassid\Handlers\P4R4Handler.cs" />
     <Compile Include="prenassid\Utils\PlayerExtension.cs" />
+    <Compile Include="prenassid\Utils\UserFuncs.cs" />
     <Compile Include="prenassid\Watcher.cs" />
     <Compile Include="StrategyFactory.cs" />
     <Compile Include="Default\RandomStrategy.cs" />
