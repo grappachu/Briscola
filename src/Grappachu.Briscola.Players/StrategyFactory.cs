@@ -19,7 +19,8 @@ namespace Grappachu.Briscola.Players
             {
                 {"random", () => new RandomStrategy()},
                 {"ilmior", () => new IlmiorStrategy()},
-                {GrappachuStrategy.StrategyName, () => new GrappachuStrategy()}
+                {GrappachuStrategy.StrategyName, () => new GrappachuStrategy() },
+                {LittleWackosStrategy.StrategyName, () => new LittleWackosStrategy()}
             };
         }
 
