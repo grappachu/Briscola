@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Grappachu.Briscola.Exceptions;
 using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Model;
 using Moq;
@@ -100,7 +101,7 @@ namespace Grappachu.Briscola.Test.Logic
         public void Look_should_notify_strategy()
         {
             var sut = new Player(_strategyMock.Object, "testPlayer");
-            var briscola = new Card("Cuori", 5); 
+            var briscola = new Card("Cuori", 5);
             var state = new GameState(new List<IPlayer>(), briscola);
 
             sut.Look(state);
@@ -108,5 +109,29 @@ namespace Grappachu.Briscola.Test.Logic
             _strategyMock.Verify(x => x.Watch(sut, state));
         }
 
+
+        [Fact(DisplayName = "A player can choose only cards from his hands")]
+        public void Play_should_choose_cards_from_hands_only()
+        {
+            var state = new GameState(new List<IPlayer>(), new Card());
+            var handCards = new[]
+             {
+                new Card("Danari", 5),
+                new Card("Coppe", 8),
+                new Card("Spade", 2)
+            };
+            var sut = new Player(_strategyMock.Object, "testPlayer", handCards);
+            _strategyMock.Setup(m => m.Choose(It.IsAny<IPlayer>(), It.IsAny<GameState>())).Returns(new Card("Spade", 5));
+
+            var ex = Record.Exception(() =>
+            {
+                var card = sut.Play(state);
+            });
+
+            ex.Should().Be.OfType<InvalidCardException>();
+        }
+
     }
+
+   
 }

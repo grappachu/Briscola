@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Grappachu.Briscola.Exceptions;
 using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Utils;
 
@@ -34,7 +35,10 @@ namespace Grappachu.Briscola.Model
         public Card Play(GameState state)
         {
             var card = Strategy.Choose(this, state);
-            _handCards.Remove(card);
+            if (!_handCards.Remove(card))
+            {
+                throw new InvalidCardException($"Il giocatore {Name} ha giocato una carta non valida ({card})");
+            }
             Chat.GetUI().Send(string.Format("{0} | GIOCA: {1} di {2}", Name.PadRight(8), card.Value, card.Seed));
             return card;
         }

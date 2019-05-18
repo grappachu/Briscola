@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\BriscolaException.cs" />
+    <Compile Include="Exceptions\InvalidCardException.cs" />
     <Compile Include="Interfaces\IRobotStrategy.cs" />
     <Compile Include="Interfaces\IStrategyFactory.cs" />
     <Compile Include="Interfaces\IDeckFactory.cs" />

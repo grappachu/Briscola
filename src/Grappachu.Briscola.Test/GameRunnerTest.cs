@@ -40,10 +40,10 @@ namespace Grappachu.Briscola.Test
             _gameMock.Setup(x => x.PlayHand());
             _gameMock.SetupGet(x => x.State).Returns(new GameState(new List<IPlayer>
                 {
-                    new Player(null, "A", new Card[0]),
-                    new Player(null, "B", new Card[0]),
-                    new Player(null, "C", new Card[0]),
-                    new Player(null, "D", new Card[0])
+                    new Player(new RandomStrategy(), "A", new Card[0]),
+                    new Player(new RandomStrategy(), "B", new Card[0]),
+                    new Player(new RandomStrategy(), "C", new Card[0]),
+                    new Player(new RandomStrategy(), "D", new Card[0])
                 },
                 new Card("Brisocla", 1)));
 

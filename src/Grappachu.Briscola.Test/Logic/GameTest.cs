@@ -77,6 +77,7 @@ namespace Grappachu.Briscola.Test.Logic
             _sut.State.Turn.Should().Be(0);
         }
 
+
         [Fact]
         public void Start_cannot_be_called_when_players_are_1_or_more_than_4()
         {
