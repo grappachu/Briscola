@@ -32,6 +32,8 @@ namespace Grappachu.Briscola.Players.veronaa
         
             var chosenCard = myself.HandCards.OrderBy(card => card.Value).First();
 
+            if (chosenCardWithSeed.Value == 0)
+                return chosenCard;
             if (chosenCard.Value > chosenCardWithSeed.Value && assiNonGiocati.Count > 2) 
                 return chosenCard;
             else
