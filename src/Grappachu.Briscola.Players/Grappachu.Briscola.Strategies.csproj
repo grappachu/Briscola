@@ -73,6 +73,18 @@
     <Compile Include="Human\HumanStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="zaninig\Model\BaseStrategy.cs" />
+    <Compile Include="zaninig\Model\CardExtensions.cs" />
+    <Compile Include="zaninig\Model\CardInfo.cs" />
+    <Compile Include="zaninig\Model\Deck.cs" />
+    <Compile Include="zaninig\Model\GameStateExtension.cs" />
+    <Compile Include="zaninig\Model\League.cs" />
+    <Compile Include="zaninig\Model\MoveValue.cs" />
+    <Compile Include="zaninig\Model\Turn.cs" />
+    <Compile Include="zaninig\Strategies\BaseStrategy.cs" />
+    <Compile Include="zaninig\Strategies\BriscolaCalculator.cs" />
+    <Compile Include="zaninig\Strategies\GabStrategy.cs" />
+    <Compile Include="zaninig\Strategies\StrategyMatrix.cs" />
+    <Compile Include="zaninig\Strategies\TurnStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Grappachu.Briscola\Grappachu.Briscola.csproj">
@@ -80,9 +92,7 @@
       <Name>Grappachu.Briscola</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="zaninig\Strategies\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

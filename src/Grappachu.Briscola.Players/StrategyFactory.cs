@@ -7,6 +7,7 @@ using Grappachu.Briscola.Players.Default;
 using Grappachu.Briscola.Players.Human;
 using Grappachu.Briscola.Players.prenassid;
 using Grappachu.Briscola.Players.zaninig.Model;
+using Grappachu.Briscola.Players.zaninig.Strategies;
 
 namespace Grappachu.Briscola.Players
 {
@@ -19,7 +20,7 @@ namespace Grappachu.Briscola.Players
             _roboFactories = new Dictionary<string, Func<IStrategy>>
             {
                 {"random", () => new RandomStrategy()},
-                {"ilmior", () => new IlmiorStrategy()},
+                {"ilmior", () => new GabStrategy()},
                 {GrappachuStrategy.StrategyName, () => new GrappachuStrategy()},
                 {AbercioStrategy.StrategyName, () => new AbercioStrategy()}
             };

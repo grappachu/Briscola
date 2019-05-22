@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Grappachu.Briscola.Interfaces;
 using Grappachu.Briscola.Logic;
@@ -110,6 +111,7 @@ namespace Grappachu.Briscola.UI.Util
                 _game.PlayHand();
 
                 _game.Refill();
+                Debug.WriteLine("-----------------------");
             }
 
             _ui.Send("\nPARTITA TERMINATA!");
