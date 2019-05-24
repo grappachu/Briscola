@@ -72,6 +72,7 @@
     <Compile Include="Default\RandomStrategy.cs" />
     <Compile Include="Human\HumanStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="veronaa\LittleWackosStrategy.cs" />
     <Compile Include="zaninig\Model\BaseStrategy.cs" />
     <Compile Include="zaninig\Model\CardExtensions.cs" />
     <Compile Include="zaninig\Model\CardInfo.cs" />
