@@ -87,6 +87,8 @@
     <Compile Include="prenassid\P4R4HandlerTest.cs" />
     <Compile Include="prenassid\StateFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="suerzg\CreateDish.cs" />
+    <Compile Include="suerzg\Gabry404StrategyTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Grappachu.Briscola.Players\Grappachu.Briscola.Strategies.csproj">
