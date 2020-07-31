@@ -22,15 +22,16 @@ namespace Grappachu.Briscola.Players.suerzg
     {
       var specialMovePredicate = new Func<Card, bool>(hc => hc.Seed != state.Briscola.Seed && hc.IsLoad() && !state.BriscolaInDish());
       var lowBriscolaPredicate = new Func<Card, bool>(hc => hc.Seed == state.Briscola.Seed && hc.IsInsignificant());
+      var insignificantPredicate = new Func<Card, bool>(hc => hc.Seed != state.Briscola.Seed && hc.IsInsignificant());
 
       if (playedCards.Count == 0 && myself.HasCard(specialMovePredicate))
       {
         return myself.GetCard(specialMovePredicate);
       }
 
-      if (state.Turn == 0)
+      if (state.Dish.Count == 0)
       {
-        return myself.HasCard(Predicates.InsignificantPredicate) ? myself.GetCard(Predicates.InsignificantPredicate) : myself.GetCard(Predicates.RandomPredicate);
+        return myself.HasCard(insignificantPredicate) ? myself.GetCard(insignificantPredicate) : myself.GetCard(Predicates.RandomPredicate);
       }
 
       if ((state.PointsInDish() || state.TrumpInDish()) && myself.CheckAndGetCard(lowBriscolaPredicate, ChooseAlgorithm.Lowest, out Card? card))
@@ -38,7 +39,7 @@ namespace Grappachu.Briscola.Players.suerzg
         return card.Value;
       }
 
-      return myself.HasCard(Predicates.InsignificantPredicate) ? myself.GetCard(Predicates.InsignificantPredicate) : myself.GetCard(Predicates.RandomPredicate);
+      return myself.HasCard(insignificantPredicate) ? myself.GetCard(insignificantPredicate) : myself.GetCard(Predicates.RandomPredicate);
     }
 
     protected override void OnWatch(IPlayer myself, GameState state)

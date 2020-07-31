@@ -10,11 +10,6 @@ namespace Grappachu.Briscola.Players.suerzg
       get { return hc => true; }
     }
 
-    public static Func<Card, bool> InsignificantPredicate
-    {
-      get { return hc => hc.IsInsignificant(); }
-    }
-
     public static Func<Card, bool> TrumpPredicate
     {
       get { return hc => hc.IsTrump(); }
