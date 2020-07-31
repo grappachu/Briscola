@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Grappachu.Briscola.Model;
+﻿using Grappachu.Briscola.Model;
 using Grappachu.Briscola.Players.suerzg;
-using Grappachu.Briscola.Strategies.Test.prenassid;
 using SharpTestsEx;
+using System.Linq;
 using Xunit;
 
 namespace Grappachu.Briscola.Strategies.Test.suerzg
 {
-	public class Gabry404StrategyTest
+  public class Gabry404StrategyTest
 	{
 		
 		private readonly Gabry404Strategy _gabry404Strategy;
@@ -21,7 +16,7 @@ namespace Grappachu.Briscola.Strategies.Test.suerzg
 			_gabry404Strategy = new Gabry404Strategy();
 		}
 
-		[Fact(DisplayName = "Alla prima mano se c'è una carta con grandi punti in mano viene giocata ma non se è di briscola")]
+		[Fact(DisplayName = "Alla prima mano se c'è un carico in mano, viene giocato")]
 		public void PrimaManoSpecialGabry404()
 		{
 			var briscola = new Card("Spade", 3);
@@ -39,7 +34,7 @@ namespace Grappachu.Briscola.Strategies.Test.suerzg
 			card.Should().Be.EqualTo(new Card("Bastoni", 3));
 		}
 
-		[Fact(DisplayName = "Alla prima mano se c'è una carta con grandi punti in mano viene giocata ma non se è di briscola")]
+		[Fact(DisplayName = "Alla prima mano se c'è un asso o tre di briscola in mano, non viene giocato")]
 		public void PrimaManoSpecialGabry404Not()
 		{
 			var briscola = new Card("Spade", 3);
@@ -57,8 +52,8 @@ namespace Grappachu.Briscola.Strategies.Test.suerzg
 			card.Should().Not.Be.EqualTo(new Card("Spade", 3));
 		}
 
-		[Fact(DisplayName = "Deve giocare liscio")]
-		public void DeveGiocareLiscio()
+		[Fact(DisplayName = "Deve giocare liscio se è il primo giocatore")]
+		public void DeveGiocareLiscioSePrimoGiocatore()
 		{
 			var briscola = new Card("Spade", 3);
 			var state = CreateDish.CreateHand(_gabry404Strategy, briscola, new Card[] { },
@@ -68,9 +63,20 @@ namespace Grappachu.Briscola.Strategies.Test.suerzg
 					new Card("Danari", 2),
 					new Card("Spade", 4)
 				});
-			var me = state.Players.Single(x => x.Strategy == _gabry404Strategy);
 
-			var card = _gabry404Strategy.Choose(me, state);
+      Card? card = null;
+      var me = state.Players.Single(x => x.Strategy == _gabry404Strategy);
+			foreach (var player in state.Players)
+      {
+        if (player.Strategy == _gabry404Strategy)
+        {
+          card = _gabry404Strategy.Choose(me, state);
+        }
+        else
+				{
+          _gabry404Strategy.Watch(me, state);
+        }
+      }
 
 			card.Should().Be.EqualTo(new Card("Danari", 2));
 		}
