@@ -5,7 +5,7 @@ using Grappachu.Briscola.Logic;
 using Grappachu.Briscola.Model;
 using Grappachu.Briscola.Players.Default;
 
-namespace Grappachu.Briscola.Strategies.Test.suerzg
+namespace Grappachu.Briscola.Strategies.Test.suerzg.Utils
 {
   public static class CreateDish
   {

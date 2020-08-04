@@ -3,6 +3,7 @@ using Grappachu.Briscola.Model;
 using Grappachu.Briscola.Players.suerzg;
 using SharpTestsEx;
 using System.Linq;
+using Grappachu.Briscola.Strategies.Test.suerzg.Utils;
 using Xunit;
 
 namespace Grappachu.Briscola.Strategies.Test.suerzg
@@ -27,7 +28,7 @@ namespace Grappachu.Briscola.Strategies.Test.suerzg
           new Card("Bastoni", 3),
           new Card("Danari", 2),
           new Card("Spade", 4)
-        }, 0);
+        });
       var me = state.Players.Single(x => x.Strategy == _gabry404Strategy);
 
       var card = _gabry404Strategy.Choose(me, state);
@@ -45,7 +46,7 @@ namespace Grappachu.Briscola.Strategies.Test.suerzg
           new Card("Spade", 3),
           new Card("Danari", 2),
           new Card("Spade", 4)
-        }, 0);
+        });
       var me = state.Players.Single(x => x.Strategy == _gabry404Strategy);
 
       var card = _gabry404Strategy.Choose(me, state);
@@ -65,7 +66,7 @@ namespace Grappachu.Briscola.Strategies.Test.suerzg
           new Card("Spade", 4)
         }, 0);
 
-      _gabry404Strategy.playedCards = new Dictionary<string, List<Card>>()
+      _gabry404Strategy.PlayedCards = new Dictionary<string, List<Card>>()
       {
         {"Coppe", new List<Card>{new Card("Coppe", 5)}}
       };
@@ -109,7 +110,7 @@ namespace Grappachu.Briscola.Strategies.Test.suerzg
           new Card("Spade", 3)
         }, 1);
 
-      _gabry404Strategy.playedCards = new Dictionary<string, List<Card>>()
+      _gabry404Strategy.PlayedCards = new Dictionary<string, List<Card>>()
       {
         {"Spade", new List<Card>{new Card("Spade", 1)}}
       };
@@ -121,13 +122,61 @@ namespace Grappachu.Briscola.Strategies.Test.suerzg
     }
 
     [Fact(DisplayName = "Se sul piatto c'è il re e carico prendi con una briscola superiore")]
-    public void DeveGiocareBriscolaConPiattoCaricoEBriscolato()
+    public void DeveGiocareBriscolaSeSulPiattoHoCaricoEReDiBriscola()
     {
+      var briscola = new Card("Danari", 8);
+      var state = CreateDish.CreateHand(_gabry404Strategy, briscola, new Card[]
+        {
+          new Card("Bastoni", 4),
+          new Card("Bastoni", 3),
+          new Card("Danari", 10)
+        },
+        new[]
+        {
+          new Card("Danari", 1),
+          new Card("Danari", 2),
+          new Card("Spade", 3)
+        }, 4);
+
+      _gabry404Strategy.PlayedCards = new Dictionary<string, List<Card>>()
+      {
+        {"Bastoni", new List<Card>{new Card("Bastoni", 3),new Card("Bastoni", 4)}},
+        {"Danari", new List<Card>{new Card("Danari", 10)}}
+      };
+
+      var me = state.Players.Single(x => x.Strategy == _gabry404Strategy);
+      var card = _gabry404Strategy.Choose(me, state);
+
+      card.Should().Be.EqualTo(new Card("Danari", 1));
     }
 
     [Fact(DisplayName = "Se sul piatto c'è il re e carico prendi con una briscola di minor valore possibile")]
-    public void DeveGiocareTreDiBriscolaConPiattoCaricoEBriscolato()
+    public void DeveGiocareTreDiBriscolaSeSulPiattoHoCaricoEReDiBriscola()
     {
+      var briscola = new Card("Danari", 8);
+      var state = CreateDish.CreateHand(_gabry404Strategy, briscola, new Card[]
+        {
+          new Card("Bastoni", 4),
+          new Card("Bastoni", 3),
+          new Card("Danari", 10)
+        },
+        new[]
+        {
+          new Card("Danari", 1),
+          new Card("Danari", 2),
+          new Card("Danari", 3)
+        }, 4);
+
+      _gabry404Strategy.PlayedCards = new Dictionary<string, List<Card>>()
+      {
+        {"Bastoni", new List<Card>{new Card("Bastoni", 3),new Card("Bastoni", 4)}},
+        {"Danari", new List<Card>{new Card("Danari", 10)}}
+      };
+
+      var me = state.Players.Single(x => x.Strategy == _gabry404Strategy);
+      var card = _gabry404Strategy.Choose(me, state);
+
+      card.Should().Not.Be.EqualTo(new Card("Danari", 3));
     }
 
   }

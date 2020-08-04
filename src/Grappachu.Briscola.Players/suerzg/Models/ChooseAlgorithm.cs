@@ -1,4 +1,4 @@
-﻿namespace Grappachu.Briscola.Players.suerzg
+﻿namespace Grappachu.Briscola.Players.suerzg.Models
 {
   internal enum ChooseAlgorithm
   {

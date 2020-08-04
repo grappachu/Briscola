@@ -1,5 +1,5 @@
-﻿using System;
-using Grappachu.Briscola.Model;
+﻿using Grappachu.Briscola.Model;
+using System;
 
 namespace Grappachu.Briscola.Players.suerzg
 {
@@ -12,7 +12,7 @@ namespace Grappachu.Briscola.Players.suerzg
 
     public static Func<Card, bool> TrumpPredicate
     {
-      get { return hc => hc.IsTrump(); }
+      get { return hc => hc.IsPoints(); }
     }
   }
 }
