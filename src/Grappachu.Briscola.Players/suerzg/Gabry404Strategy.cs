@@ -43,7 +43,7 @@ namespace Grappachu.Briscola.Players.suerzg
       var specialMove = new Func<Card, bool>(hc => hc.Seed != state.Briscola.Seed && hc.IsTrump() && !state.BriscolaInDish());
       var lowBriscola = new Func<Card, bool>(hc => hc.Seed == state.Briscola.Seed && hc.IsInsignificant());
       var highBriscola = new Func<Card, bool>(hc => hc.Seed == state.Briscola.Seed && hc.IsPoints());
-      var highestBriscola = new Func<Card, bool>(hc => hc.Seed == state.Briscola.Seed && hc.IsPoints());
+      var highestBriscola = new Func<Card, bool>(hc => hc.Seed == state.Briscola.Seed && hc.IsTrump());
       var insignificant = new Func<Card, bool>(hc => hc.Seed != state.Briscola.Seed && hc.IsInsignificant());
 
       if (PlayedCards.Count == 0 && myself.HasCard(specialMove))
@@ -56,7 +56,7 @@ namespace Grappachu.Briscola.Players.suerzg
         return myself.HasCard(insignificant) ? myself.GetCard(insignificant) : myself.GetCard(Predicates.RandomPredicate);
       }
 
-      if ((state.PointsInDish() || state.TrumpInDish()))
+      if (state.PointsInDish() || state.TrumpInDish())
       {
         Card? c;
         if (!state.BriscolaInDish() &&
