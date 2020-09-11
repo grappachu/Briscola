@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.10
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grappachu.Briscola", "Grappachu.Briscola\Grappachu.Briscola.csproj", "{8E43401F-C1CF-4876-8E7D-00167187BD1F}"
 EndProject
@@ -11,6 +11,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grappachu.Briscola.UI", "Grappachu.Briscola.UI\Grappachu.Briscola.UI.csproj", "{86DAC69D-0DBB-4C92-AD29-BFB25D2F6178}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grappachu.Briscola.Strategies.Test", "Grappachu,Briscola.Strategies.Test\Grappachu.Briscola.Strategies.Test.csproj", "{79251FFF-4472-433E-813E-D0B8EE4998E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grappachu.Briscola.Web", "Grappachu.Briscola.Web\Grappachu.Briscola.Web.csproj", "{3A947140-2323-4788-BDFC-7061C87A53FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{79251FFF-4472-433E-813E-D0B8EE4998E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79251FFF-4472-433E-813E-D0B8EE4998E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79251FFF-4472-433E-813E-D0B8EE4998E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A947140-2323-4788-BDFC-7061C87A53FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A947140-2323-4788-BDFC-7061C87A53FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A947140-2323-4788-BDFC-7061C87A53FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A947140-2323-4788-BDFC-7061C87A53FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

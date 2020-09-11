@@ -1,0 +1,85 @@
+﻿@model Grappachu.Briscola.Web.Models.StartNewGame
+
+@{
+    ViewBag.Title = "Briscola";
+}
+
+@if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+{
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <strong>Attenzione!</strong>
+        @Html.ValidationSummary(true, "")
+    </div>
+}
+
+<h1>Benvenuto!</h1>
+
+<hr />
+@using (Html.BeginForm("ContinueNewGame", "Briscola", FormMethod.Post))
+{
+    <div class="form-group">
+
+        <div style="padding: 0">
+            @Html.LabelFor(model => model.CurrentGameType)
+        </div>
+
+        <div style="padding: 0; margin-bottom:10px">
+            @Html.DropDownList("currentGameType", Model.GameTypes, new { @class = "form-control", style = "width: 250px;" })
+            <span id="co" class="text-danger">Campo obbligatorio</span>
+        </div>
+
+    </div>
+    <div class="form-group" hidden id="dm">
+        @Html.LabelFor(model => model.NumberOfGames, new { @class = "control-label" })
+
+        <div>
+            @Html.EditorFor(model => model.NumberOfGames, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NumberOfGames, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" hidden id="rt">
+        @Html.LabelFor(model => model.NumberOfMatchesPerGame)
+
+        <div>
+            @Html.EditorFor(model => model.NumberOfMatchesPerGame, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NumberOfMatchesPerGame, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary"><span id="btn">Continua</span></button>
+
+}
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#currentGameType").change(function (e) {
+                var val = $(this).val();
+
+                if (val == "DirectMatch") {
+                    $('#dm').show();
+                    $('#rt').hide();
+                    $('#btn').text("Continua");
+                    $('#co').hide();
+
+                } else if (val == "RobotTournament") {
+                    $('#rt').show();
+                    $('#dm').hide();
+                    $('#btn').text("Gioca");
+                    $('#co').hide();
+
+                } else {
+                    $('#rt').hide();
+                    $('#dm').hide();
+                    $('#btn').text("Gioca");
+                    $('#co').show();
+                }
+            });
+        });
+    </script>
+}

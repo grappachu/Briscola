@@ -1,0 +1,78 @@
+﻿@model Grappachu.Briscola.Web.Models.StartNewGame
+@{
+    ViewBag.Title = "Continua";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+{
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <strong>Attenzione!</strong>
+        @Html.ValidationSummary(true, "")
+    </div>
+}
+
+@using (Html.BeginForm("GameResult", "Briscola", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.CurrentGameType)
+    @Html.HiddenFor(model => model.NumberOfGames)
+    @Html.HiddenFor(model => model.NumberOfMatchesPerGame)
+
+
+    <div class="form-group">
+        <div style="padding: 0">
+            @Html.LabelFor(model => model.NumberOfPlayers)
+            @Html.RadioButtonFor(model => model.NumberOfPlayers, 2) @Html.Label("2")
+            @Html.RadioButtonFor(model => model.NumberOfPlayers, 4@*, new { @checked = "checked" }*@) @Html.Label("4")
+        </div>
+        <div class="row body-content form-group">
+            <div class="col-sm-6" style="padding: 0;">
+                <h3>Squadra 1</h3>
+                <div class="col-sm-6" style="padding: 0">
+                    @Html.LabelFor(model => model.FirstListOfRobots)
+                    @Html.DropDownList("FirstCurrentRobot", Model.FirstListOfRobots, new { @class = "form-control", style = "width: 250px;" })
+                </div>
+
+                <div class="col-sm-6" style="padding: 0" id="srft">
+                    @Html.LabelFor(model => model.SecondListOfRobots)
+                    @Html.DropDownList("SecondCurrentRobot", Model.SecondListOfRobots, new { @class = "form-control", style = "width: 250px;" })
+                </div>
+            </div>
+            <div class="col-sm-6" style="padding: 0;">
+                <h3>Squadra 2</h3>
+                <div class="col-sm-6" style="padding: 0">
+                    @Html.LabelFor(model => model.ThirdListOfRobots)
+                    @Html.DropDownList("ThirdCurrentRobot", Model.ThirdListOfRobots, new { @class = "form-control", style = "width: 250px;" })
+                </div>
+
+                <div class="col-sm-6" style="padding: 0" id="srst">
+                    @Html.LabelFor(model => model.FourthListOfRobots)
+                    @Html.DropDownList("FourthCurrentRobot", Model.FourthListOfRobots, new { @class = "form-control", style = "width: 250px;" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary"><span id="btn">Gioca</span></button>
+}
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#sr").show();
+        $("input[name='NumberOfPlayers']").on("change", function () {
+            if ($(this).val() == 2) {
+                $("#srft").hide();
+                $("#srst").hide();
+
+            } else {
+                $("#srft").show();
+                $("#srst").show();
+            }
+        })
+    </script>
+}

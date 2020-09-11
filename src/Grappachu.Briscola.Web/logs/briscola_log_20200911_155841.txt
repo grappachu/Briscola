@@ -1,0 +1,17 @@
+2020-09-11 15:58:42,141 [5] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Chiamata action StartNewGame
+2020-09-11 15:58:57,204 [5] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Chiamata action ContinueNewGame
+2020-09-11 15:58:57,220 [5] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Dati corretti. Partita iniziata
+2020-09-11 15:59:00,741 [7] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Eccezione pagina ContinueNewGame
+2020-09-11 15:59:05,194 [6] FATAL Grappachu.Briscola.Web.Controllers.BriscolaController Fatal error
+2020-09-11 15:59:48,470 [5] FATAL Grappachu.Briscola.Web.Controllers.BriscolaController Fatal error
+2020-09-11 15:59:58,711 [5] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Chiamata action StartNewGame
+2020-09-11 16:00:04,062 [5] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Chiamata action ContinueNewGame
+2020-09-11 16:00:04,063 [5] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Dati corretti. Partita iniziata
+2020-09-11 16:00:05,859 [5] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Eccezione pagina ContinueNewGame
+2020-09-11 16:00:20,969 [5] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Dati corretti. Partita conclusa
+2020-09-11 16:45:59,799 [35] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Eccezione pagina ContinueNewGame
+2020-09-11 16:46:04,978 [32] FATAL Grappachu.Briscola.Web.Controllers.BriscolaController Fatal error
+2020-09-11 16:46:16,258 [32] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Eccezione pagina ContinueNewGame
+2020-09-11 16:46:36,547 [34] FATAL Grappachu.Briscola.Web.Controllers.BriscolaController Fatal error
+2020-09-11 16:46:51,502 [32] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Eccezione pagina ContinueNewGame
+2020-09-11 16:46:55,425 [37] FATAL Grappachu.Briscola.Web.Controllers.BriscolaController Fatal error

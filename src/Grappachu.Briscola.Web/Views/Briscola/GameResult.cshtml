@@ -1,0 +1,184 @@
+﻿@model Grappachu.Briscola.Web.Models.GameResult
+@{
+    ViewBag.Title = "Risultato";
+}
+
+@switch (Model.GameType.ToString())
+{
+    case "DirectMatch":
+
+        <div>
+            <h1>
+                Scontro diretto a @Model.NumberOfGames partite
+                <a class="btn btn-primary offset-4" href='@Url.Action("StartNewGame", "Briscola" )' style="float: right;">Start new game</a>
+            </h1>
+        </div>
+        <div class="tableFixHead">
+            <table class="table table-striped table-bordered text-center">
+
+                <thead class="fixed">
+                    @if (Model.NumberOfPlayers == 4)
+                    {
+                        <tr style="font-size: 20px">
+                            <th scope="col">#</th>
+                            <th scope="col" class="ctr">@Html.Label(Model.TeamOneMembers[0] + " & " + Model.TeamOneMembers[1])</th>
+                            <th scope="col" class="ctr">@Html.Label(Model.TeamTwoMembers[0] + " & " + Model.TeamTwoMembers[1])</th>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr style="font-size: 20px">
+                            <th scope="col">#</th>
+                            <th scope="col" class="ctr">@Html.Label(Model.TeamOneMembers[0])</th>
+                            <th scope="col" class="ctr">@Html.Label(Model.TeamTwoMembers[0])</th>
+                        </tr>
+                    }
+                </thead>
+                <thead class="fixed2">
+                    <tr style="font-size: 12px">
+                        <th></th>
+                        <th class="ctr">Punteggio partita (punti ottenuti)</th>
+                        <th class="ctr">Punteggio partita (punti ottenuti)</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{
+                        var count = 1;
+                        foreach (var score in Model.Score)
+                        {
+                            <tr>
+                                <th style="font-size: 15px">@Html.Label("Match " + count)</th>
+                                @if (score.Item1 < score.Item2)
+                                {
+                                    <td>@score.Item1 (+0)</td>
+                                    <td><strong>@score.Item2 (+2)</strong></td>
+                                }
+                                else if (score.Item1 > score.Item2)
+                                {
+                                    <td><strong>@score.Item1 (+2)</strong></td>
+                                    <td>@score.Item2 (+0)</td>
+                                }
+                                else
+                                {
+                                    <td><strong>@score.Item1 (+1)</strong></td>
+                                    <td><strong>@score.Item2 (+1)</strong></td>
+                                }
+                            </tr>
+                            count++;
+                        }
+
+                        <tr style="font-size: 20px">
+                            <th>@Html.Label("Somma totale punti")</th>
+                            @if (Model.FirstTeamFinalScore < Model.SecondTeamFinalScore)
+                            {
+                                <td>@Model.FirstTeamFinalScore</td>
+                                <td><strong>@Model.SecondTeamFinalScore</strong></td>
+                            }
+                            else if (Model.FirstTeamFinalScore > Model.SecondTeamFinalScore)
+                            {
+                                <td><strong>@Model.FirstTeamFinalScore</strong></td>
+                                <td>@Model.SecondTeamFinalScore</td>
+                            }
+                            else
+                            {
+                                <td><strong>@Model.FirstTeamFinalScore</strong></td>
+                                <td><strong>@Model.SecondTeamFinalScore</strong></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        break;
+
+    case "RobotTournament":
+
+
+        <div>
+            <h1>
+                Classifica finale
+                <a class="btn btn-primary offset-4" href='@Url.Action("StartNewGame", "Briscola" )' style="float: right;">Start new game</a>
+            </h1>
+        </div>
+
+        <table class="table table-striped table-bordered text-center">
+            <thead class="thead-dark">
+                <tr style="font-size: 20px">
+                    <td>#</td>
+                    <td>Robot</td>
+                    <td>Punteggio</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    int i = 1;
+                    int currentPosition = 0;
+                    var currentScore = 0;
+                    foreach (var result in Model.TournamentRanking)
+                    {
+                        if (result.Item2 == currentScore)
+                        {
+                            <tr>
+                                <td>@currentPosition°</td>
+                                <td>@result.Item1</td>
+                                <td>@result.Item2</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>@i°</td>
+                                <td>@result.Item1</td>
+                                <td>@result.Item2</td>
+                            </tr>
+                            currentPosition = i;
+                        }
+                        currentScore = result.Item2;
+                        i++;
+                    }
+                }
+            </tbody>
+
+        </table>
+
+        break;
+}
+
+
+
+<style>
+    .ctr {
+        text-align: center;
+    }
+
+    .tableFixHead {
+        overflow-y: auto;
+        height: 600px;
+    }
+
+        .tableFixHead .fixed th {
+            position: sticky;
+            top: 0px;
+            background-color: #eee;
+        }
+
+        .tableFixHead .fixed2 th {
+            position: sticky;
+            top: 49px;
+            background-color: #fff;
+        }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px 16px;
+    }
+</style>
+
+

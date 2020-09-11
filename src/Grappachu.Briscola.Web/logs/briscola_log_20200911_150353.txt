@@ -1,0 +1,6 @@
+2020-09-11 15:03:53,594 [6] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Chiamata action StartNewGame
+2020-09-11 15:04:05,482 [6] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Chiamata action ContinueNewGame
+2020-09-11 15:04:05,528 [6] ERROR Grappachu.Briscola.Web.Controllers.BriscolaController Eccezione pagina StartNewGame
+2020-09-11 15:04:55,403 [6] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Chiamata action ContinueNewGame
+2020-09-11 15:04:55,434 [6] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Partita iniziata
+2020-09-11 15:04:55,435 [6] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Dati mancanti nella pagina StartNewGame

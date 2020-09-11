@@ -1,0 +1,1 @@
+2020-09-11 14:43:04,617 [6] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Chiamata action StartNewGame

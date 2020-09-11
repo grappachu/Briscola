@@ -1,0 +1,5 @@
+2020-09-11 16:51:31,194 [6] INFO  Grappachu.Briscola.Web.Controllers.BriscolaController Chiamata action StartNewGame
+2020-09-11 16:52:08,151 [6] ERROR Grappachu.Briscola.Web.Controllers.BriscolaController Eccezione pagina ContinueNewGame
+Grappachu.Briscola.Exceptions.BriscolaException: Il gioco selezionato non è valido
+   in Grappachu.Briscola.Web.Services.BriscolaService.Play(GameResult gameResult) in C:\Users\Nick\source\repos\Briscola\src\Grappachu.Briscola.Web\Services\BriscolaService.cs:riga 106
+   in Grappachu.Briscola.Web.Controllers.BriscolaController.GameResult(StartNewGame startNewGame) in C:\Users\Nick\source\repos\Briscola\src\Grappachu.Briscola.Web\Controllers\BriscolaController.cs:riga 84
