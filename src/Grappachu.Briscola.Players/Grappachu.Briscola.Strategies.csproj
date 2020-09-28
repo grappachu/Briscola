@@ -80,6 +80,12 @@
     <Compile Include="Default\RandomStrategy.cs" />
     <Compile Include="Human\HumanStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="suerzg\Extensions\CardExtension.cs" />
+    <Compile Include="suerzg\Models\ChooseAlgorithm.cs" />
+    <Compile Include="suerzg\Extensions\PlayerExtension.cs" />
+    <Compile Include="suerzg\Extensions\GameStateExtension.cs" />
+    <Compile Include="suerzg\Gabry404Strategy.cs" />
+    <Compile Include="suerzg\Utils\Predicates.cs" />
     <Compile Include="veronaa\LittleWackosStrategy.cs" />
     <Compile Include="zaninig\Model\BaseStrategy.cs" />
     <Compile Include="zaninig\Model\CardExtensions.cs" />
@@ -101,10 +107,10 @@
       <Name>Grappachu.Briscola</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
