@@ -79,6 +79,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="deiannia\CapitanOvvioStrategyTest.cs" />
+    <Compile Include="deiannia\GameStateBuilder.cs" />
     <Compile Include="prenassid\P4R1HandlerTest.cs" />
     <Compile Include="prenassid\P4R2HandlerTest.cs" />
     <Compile Include="depratoa\AbercioStrategyTest.cs" />
