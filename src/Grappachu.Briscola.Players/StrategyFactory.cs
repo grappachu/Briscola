@@ -9,6 +9,7 @@ using Grappachu.Briscola.Players.prenassid;
 using Grappachu.Briscola.Players.veronaa;
 using Grappachu.Briscola.Players.zaninig.Model;
 using Grappachu.Briscola.Players.zaninig.Strategies;
+using Grappachu.Briscola.Players.deiannia;
 using Grappachu.Briscola.Players.suerzg;
 
 namespace Grappachu.Briscola.Players
@@ -26,7 +27,8 @@ namespace Grappachu.Briscola.Players
                 {GrappachuStrategy.StrategyName, () => new GrappachuStrategy()},
                 {AbercioStrategy.StrategyName, () => new AbercioStrategy()},
                 {LittleWackosStrategy.StrategyName, () => new LittleWackosStrategy()},
-                {Gabry404Strategy.StrategyName, () => new Gabry404Strategy()}
+                {Gabry404Strategy.StrategyName, () => new Gabry404Strategy()},
+                {CapitanOvvioStrategy.StrategyName, () => new CapitanOvvioStrategy()}
             };
         }
 

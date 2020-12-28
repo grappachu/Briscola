@@ -53,6 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default\StrategyBase.cs" />
+    <Compile Include="deiannia\CapitanOvvioStrategy.cs" />
+    <Compile Include="deiannia\CardExtension.cs" />
+    <Compile Include="deiannia\handlers\AbstractRoundHandler.cs" />
+    <Compile Include="deiannia\handlers\FirstRoundHandler.cs" />
+    <Compile Include="deiannia\handlers\FourthRoundHandler.cs" />
+    <Compile Include="deiannia\handlers\IRoundHandler.cs" />
+    <Compile Include="deiannia\handlers\SecondRoundHandler.cs" />
+    <Compile Include="deiannia\handlers\ThirdRoundHandler.cs" />
     <Compile Include="depratoa\AbercioStrategy.cs" />
     <Compile Include="depratoa\CardExtensions.cs" />
     <Compile Include="prenassid\Constraints.cs" />
