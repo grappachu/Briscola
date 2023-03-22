@@ -52,11 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="crudelea\AddPointsInDeck.cs" />
     <Compile Include="crudelea\AliceStrategy.cs" />
     <Compile Include="crudelea\IsCard.cs" />
-    <Compile Include="crudelea\ProbabilityOfWinning.cs" />
-    <Compile Include="crudelea\RimemberCard.cs" />
     <Compile Include="Default\StrategyBase.cs" />
     <Compile Include="deiannia\CapitanOvvioStrategy.cs" />
     <Compile Include="deiannia\CardExtension.cs" />
