@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="crudelea\AliceStrategy.cs" />
+    <Compile Include="crudelea\CompareCard.cs" />
     <Compile Include="crudelea\IsCard.cs" />
     <Compile Include="Default\StrategyBase.cs" />
     <Compile Include="deiannia\CapitanOvvioStrategy.cs" />

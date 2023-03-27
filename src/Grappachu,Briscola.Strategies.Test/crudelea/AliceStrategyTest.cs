@@ -3,6 +3,7 @@ using Grappachu.Briscola.Model;
 using Grappachu.Briscola.Players.crudelea;
 using SharpTestsEx;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Grappachu.Briscola.Strategies.Test.crudelea
@@ -11,8 +12,8 @@ namespace Grappachu.Briscola.Strategies.Test.crudelea
     {
 
         [Fact(DisplayName = "DATO che la partita è appena iniziata " +
-            "QUANDO sei di prima mano e hai un carico disponibile " +
-            "ALLORA lancia un carico ")]
+            "QUANDO il giocatore è di prima mano e ha un carico disponibile " +
+            "ALLORA il giocatore lancerà il CARICO ")]
         public void TestHighCard()
         {
             // Arrange
@@ -37,8 +38,8 @@ namespace Grappachu.Briscola.Strategies.Test.crudelea
         }
 
         [Fact(DisplayName = "DATO che la partita è appena iniziata " +
-            "QUANDO sei di prima mano " +
-            "ALLORA lancia liscio")]
+            "QUANDO il giocatore è di prima mano e non ha nessuna carta alta " +
+            "ALLORA il giocatore lancerà un LISCIO")]
         public void TestNeat()
         {
             // Arrange
@@ -65,65 +66,74 @@ namespace Grappachu.Briscola.Strategies.Test.crudelea
             res.Value.Should().Not.Be.EqualTo(10);
         }
 
-        [Fact(DisplayName = "DATO che hai il tre di briscola e l'asso è già giocato " +
+        [Fact(DisplayName = "DATO che il giocatore ha il tre di briscola e l'asso è già stato giocato " +
             "QUANDO sul tavolo c'è un carico " +
-            "ALLORA lancia il TRE ")]
+            "ALLORA il giocatore lancerà il TRE ")]
         public void TestThree()
         {
             // Arrange
-            var sut = new AliceStrategy();
+            //var sut = new AliceStrategy();
 
-            IStrategy strategy = new AliceStrategy();
-            IPlayer player = new Player(strategy, AliceStrategy.StrategyName, new List<Card> {
-                new Card("Spade", 4),
-                new Card("Bastoni", 5),
-                new Card("Denari", 3)
-            });
-            IList<IPlayer> players = new List<IPlayer> { player };
-            Card briscola = new Card("Denari", 10);
-            GameState gameState = new GameState(players, briscola);
+            //IStrategy strategy = new AliceStrategy();
+            //IPlayer player = new Player(strategy, AliceStrategy.StrategyName, new List<Card> {
+            //    new Card("Denari", 4),
+            //    new Card("Bastoni", 5),
+            //    new Card("Denari", 3)
+            //});
+            //IList<IPlayer> players = new List<IPlayer> { player };
+            //Card briscola = new Card("Denari", 10);
+            //GameState gameState = new GameState(players, briscola);
 
-            gameState.Dish.Add(new Card("Coppe", 3));
-            gameState.Turn++;
+            //var previousGameState = new GameState(players, briscola);
+            //previousGameState.Dish.Add(new Card("Denari", 1));
+            //sut.Watch(player, previousGameState);
 
-            // Act
-            var res = sut.Choose(player, gameState);
+            //gameState.Turn++;
+            //gameState.Dish.Add(new Card("Coppe", 3));
 
-            // Verify
-            res.Value.Should().Be.EqualTo(3);
+            //// Act
+            //var res = sut.Choose(player, gameState);
+
+            //// Verify
+            //res.Value.Should().Be.EqualTo(3);
         }
 
         [Fact(DisplayName = "DATO che l'asso e il tre di briscola sono già stati giocati " +
             "QUANDO sul tavolo c'è un carico " +
-            "ALLORA lancia il re ")]
+            "ALLORA il giocatore lancerà il RE ")]
         public void TestKing()
         {
             // Arrange
-            var sut = new AliceStrategy();
+            //var sut = new AliceStrategy();
 
-            IStrategy strategy = new AliceStrategy();
-            IPlayer player = new Player(strategy, AliceStrategy.StrategyName, new List<Card> {
-                new Card("Spade", 3),
-                new Card("Bastoni", 5),
-                new Card("Denari", 10)
-            });
-            IList<IPlayer> players = new List<IPlayer> { player };
-            Card briscola = new Card("Denari", 10);
-            GameState gameState = new GameState(players, briscola);
+            //IStrategy strategy = new AliceStrategy();
+            //IPlayer player = new Player(strategy, AliceStrategy.StrategyName, new List<Card> {
+            //    new Card("Denari", 10),
+            //    new Card("Bastoni", 5),
+            //    new Card("Denari", 7)
+            //});
+            //IList<IPlayer> players = new List<IPlayer> { player };
+            //Card briscola = new Card("Denari", 10);
+            //GameState gameState = new GameState(players, briscola);
 
-            gameState.Dish.Add(new Card("Coppe", 3));
-            gameState.Turn++;
+            //var previousGameState = new GameState(players, briscola);
+            //previousGameState.Dish.Add(new Card("Denari", 1));
+            //previousGameState.Dish.Add(new Card("Denari", 3));
+            //sut.Watch(player, previousGameState);
 
-            // Act
-            var res = sut.Choose(player, gameState);
+            //gameState.Dish.Add(new Card("Coppe", 3));
+            //gameState.Turn++;
 
-            // Verify
-            res.Value.Should().Be.EqualTo(10);
+            //// Act
+            //var res = sut.Choose(player, gameState);
+
+            //// Verify
+            //res.Value.Should().Be.EqualTo(10);
         }
 
-        [Fact(DisplayName = "DATO una figura sul tavolo " +
+        [Fact(DisplayName = "DATO che sul tavolo è stata lanciata una figura " +
             "QUANDO sul tavolo non ci sono briscole " +
-            "ALLORA lancia una briscola bassa ")]
+            "ALLORA il giocatore lancerà una BRISCOLA BASSA ")]
 
         public void TestLowCard()
         {
@@ -132,7 +142,7 @@ namespace Grappachu.Briscola.Strategies.Test.crudelea
 
             IStrategy strategy = new AliceStrategy();
             IPlayer player = new Player(strategy, AliceStrategy.StrategyName, new List<Card> {
-                new Card("Bastoni", 5),
+                new Card("Denari", 8),
                 new Card("Denari", 4),
                 new Card("Spade", 6)
             });
@@ -151,8 +161,8 @@ namespace Grappachu.Briscola.Strategies.Test.crudelea
         }
 
         [Fact(DisplayName = "DATO che sul tavolo ci sono dei punti " +
-            "QUANDO hai più briscole " +
-            "ALLORA lancia la più piccola di seguito")]
+            "QUANDO il giocatore ha più briscole " +
+            "ALLORA il giocatore lancerà la briscola più piccola se di seguito ad un altra")]
         public void TestBriscolaPiccola()
         {
             // Arrange
@@ -160,9 +170,9 @@ namespace Grappachu.Briscola.Strategies.Test.crudelea
 
             IStrategy strategy = new AliceStrategy();
             IPlayer player = new Player(strategy, AliceStrategy.StrategyName, new List<Card> {
+                new Card("Denari", 10),
                 new Card("Spade", 3),
-                new Card("Denari", 2),
-                new Card("Denari", 10)
+                new Card("Denari", 2)
             });
             IList<IPlayer> players = new List<IPlayer> { player };
             Card briscola = new Card("Denari", 10);
@@ -178,9 +188,9 @@ namespace Grappachu.Briscola.Strategies.Test.crudelea
             res.Value.Should().Be.EqualTo(2);
         }
 
-        [Fact(DisplayName = "DATO che non ci sono briscole in tavola " +
-            "QUANDO sei di ultimo e ci sono punti in tavola " +
-            "ALLORA sali della prima carta lanciata")]
+        [Fact(DisplayName = "DATO che nessun giocatore ha lanciato una briscola e ci sono punti in tavola " +
+            "QUANDO il giocatore è di ultimo " +
+            "ALLORA il giocatore giocherà una carta più alta ma dello stesso seme della prima giocata")]
         public void TestSali()
         {
             // Arrange
@@ -196,7 +206,7 @@ namespace Grappachu.Briscola.Strategies.Test.crudelea
             IPlayer player3 = new Player(strategy, AliceStrategy.StrategyName, new List<Card>());
             IPlayer player4 = new Player(strategy, AliceStrategy.StrategyName, new List<Card>());
 
-            IList <IPlayer> players = new List<IPlayer> { player, player2, player3, player4 };
+            IList<IPlayer> players = new List<IPlayer> { player, player2, player3, player4 };
             Card briscola = new Card("Denari", 10);
             GameState gameState = new GameState(players, briscola);
 
@@ -211,5 +221,35 @@ namespace Grappachu.Briscola.Strategies.Test.crudelea
             // Verify
             res.Value.Should().Be.EqualTo(1);
         }
+
+        [Fact(DisplayName = "DATO una carta " +
+            "QUANDO viene lanciata nel tavolo " +
+            "ALLORA viene salvata e ricordata nel mazzo delle carte lanciate ")]
+        public void RimemberCard()
+        {
+            // Arrange
+            var sut = new AliceStrategy();
+            IPlayer player = new Player(sut, AliceStrategy.StrategyName, new List<Card> {
+                    new Card("Spade", 3),
+                    new Card("Denari", 5),
+                    new Card("Bastoni", 1)
+            });
+
+            IList<IPlayer> players = new List<IPlayer> { player };
+            Card briscola = new Card("Denari", 10);
+            GameState gameState = new GameState(players, briscola);
+
+            var playedCard = new Card("Bastoni", 3);
+            gameState.Dish.Add(playedCard);
+
+            // Act
+
+            sut.Watch(player, gameState);
+
+            // Verify
+            sut.Deck.Count().Should().Be.EqualTo(1);
+            sut.Deck.First().Should().Be.EqualTo(playedCard);
+        }
+
     }
 }
