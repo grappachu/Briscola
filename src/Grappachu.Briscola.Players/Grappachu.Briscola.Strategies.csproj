@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Grappachu.Briscola.Players</RootNamespace>
     <AssemblyName>Grappachu.Briscola.Players</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="crudelea\AliceStrategy.cs" />
+    <Compile Include="crudelea\CompareCard.cs" />
+    <Compile Include="crudelea\IsCard.cs" />
     <Compile Include="Default\StrategyBase.cs" />
     <Compile Include="deiannia\CapitanOvvioStrategy.cs" />
     <Compile Include="deiannia\CardExtension.cs" />
