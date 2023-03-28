@@ -1,0 +1,29 @@
+Card = la carta
+HandCards = le tre carte che ho in mano
+OnChoose = quello che scelgo di lanciare io
+OnWatch = quello che scelgono di lanciare gli altri
+IPlayer = il giocatore
+Dish = tavolo
+Turn = giro
+Stack = il mazzo iniziale
+
+trump = briscola
+Asso = ace
+Carico = HighCard
+Re = king
+Cavallo = horse
+Fante = knave
+Liscio = neat
+
+seed = seme
+value = valore della carta
+deck = mazzo delle carte che sono state giocate
+
+GameState = stato del gioco
+GameResult = risultato del gioco
+
+cardToPlay = carta da giocare
+playedCards = carta già giocata
+AddRimemberCard = aggiungi quella carta
+RimemberCard = carte giocate e da ricordare
+TotalCards = carte totali 40
